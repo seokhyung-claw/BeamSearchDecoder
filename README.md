@@ -55,4 +55,4 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 This project includes code from the ldpc library (https://github.com/quantumgizmos/ldpc), originally released under the MIT License.
 
-The files `/decoder/src_cpp/gf2sparse.hpp` and `/decoder/src_cpp/sparse_matrix_base.hpp` are MIT-licensed and retains that license.
+The files `/decoder/src_cpp/gf2sparse.hpp` and `/decoder/src_cpp/sparse_matrix_base.hpp` are MIT-licensed and retain that license.
