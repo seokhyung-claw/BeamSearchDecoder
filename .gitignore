@@ -4,4 +4,4 @@ build
 *.o
 *.so
 __pycache__
-simulation_results/temp_files/
+*.pyc
