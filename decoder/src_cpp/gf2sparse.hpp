@@ -1,3 +1,14 @@
+/* 
+This file is derived from the ldpc library (https://github.com/quantumgizmos/ldpc),
+which is licensed under the MIT License.
+
+Original project copyright (c) 2024 Joschka Roffe
+
+See the LICENSE-MIT file or the following link for the full MIT License:
+https://opensource.org/licenses/MIT
+*/
+
+
 /**
  * @file gf2sparse.h
  * @brief A C++ library for sparse matrices in GF(2)

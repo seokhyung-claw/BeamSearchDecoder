@@ -30,3 +30,29 @@ To reproduce the results, follow these two steps:
 * `Beam_Search.ipynb`: Notebook to reproduce paper results.
 
 * `simulation_functions.py`: Python scripts that are used in `Beam_Search.ipynb`
+
+## Citation
+
+If you use this code in your research, please cite our paper:
+
+```bibtex
+@article{ye2025beam,
+      title={Beam search decoder for quantum LDPC codes}, 
+      author={Min Ye and Dave Wecker and Nicolas Delfosse},
+      year={2025},
+      journal={arXiv:2512.07057}
+}
+```
+
+## License
+Copyright (c) 2025 Min Ye.
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+## Third-Party Components
+
+This project includes code from the ldpc library (https://github.com/quantumgizmos/ldpc), originally released under the MIT License.
+
+The files `/decoder/src_cpp/gf2sparse.hpp` and `/decoder/src_cpp/sparse_matrix_base.hpp` are MIT-licensed and retains that license.
