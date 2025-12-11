@@ -1,6 +1,6 @@
 // This file is part of BeamSearchDecoder.
 
-// Copyright (c) 2025 Min Ye
+// Copyright (c) 2025 IonQ, Inc., all rights reserved
 
 // Licensed under the Creative Commons Attribution-NonCommercial-ShareAlike
 // 4.0 International License (CC BY-NC-SA 4.0).

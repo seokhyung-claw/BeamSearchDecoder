@@ -45,7 +45,7 @@ If you use this code in your research, please cite our paper:
 ```
 
 ## License
-Copyright (c) 2025 Min Ye.
+Copyright (c) 2025 IonQ, Inc., all rights reserved
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
