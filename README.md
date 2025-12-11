@@ -5,17 +5,21 @@ This repository contains the source code required to reproduce the simulation re
 
 ## Reproduction Instructions
 
-To reproduce the results, follow these two steps:
+To reproduce the results, follow these 3 steps:
 
-1. **Build the Decoder Extension:**
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Build the Decoder Extension:**
    Navigate to the `decoder` directory and compile the C++ extension:
    ```bash
    cd decoder
    python3 setup.py build_ext --inplace
    ```
-   Note: You might be asked to install some Python packages such as `ldpc` and `stimbposd`.
 
-2. **Run the Simulations:** Open `Beam_Search.ipynb` and execute the cells following the instructions provided within the notebook.
+3. **Run the Simulations:** Open `Beam_Search.ipynb` and execute the cells following the instructions provided within the notebook.
 
 ## File Overview
 
