@@ -79,6 +79,26 @@ class BeamSearch:
         corr = self._beamsearch.decode(syndrome)
         return (self._matrices.observables_matrix @ corr) % 2
 
+    @property
+    def initial_bp_converged(self) -> bool:
+        return self._beamsearch.initial_bp_converged
+
+    @property
+    def beam_rounds_used(self) -> int:
+        return self._beamsearch.beam_rounds_used
+
+    @property
+    def beam_paths_explored(self) -> int:
+        return self._beamsearch.beam_paths_explored
+
+    @property
+    def total_bp_iterations(self) -> int:
+        return self._beamsearch.total_bp_iterations
+
+    @property
+    def exhausted_max_rounds(self) -> bool:
+        return self._beamsearch.exhausted_max_rounds
+
     def decode_batch(
         self,
         shots: np.ndarray,

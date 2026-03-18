@@ -61,6 +61,11 @@ namespace ldpc {
             std::vector<double> initial_log_prob_ratios;
             int iterations;
             bool converge;
+            bool initial_bp_converged;
+            int beam_rounds_used;
+            int beam_paths_explored;
+            int total_bp_iterations;
+            bool exhausted_max_rounds;
 
             BeamSearchDecoder(
                     BpSparse &parity_check_matrix,
@@ -81,6 +86,11 @@ namespace ldpc {
                 this->candidate_syndrome.resize(check_count);
                 this->decoding.resize(bit_count);
                 this->converge = 0;
+                this->initial_bp_converged = 0;
+                this->beam_rounds_used = 0;
+                this->beam_paths_explored = 0;
+                this->total_bp_iterations = 0;
+                this->exhausted_max_rounds = 0;
 
 
                 if (this->channel_probabilities.size() != this->bit_count) {
@@ -106,6 +116,11 @@ namespace ldpc {
             std::vector<uint8_t> &decode(std::vector<uint8_t> &syndrome) {
 
                 this->converge = 0;
+                this->initial_bp_converged = 0;
+                this->beam_rounds_used = 0;
+                this->beam_paths_explored = 0;
+                this->total_bp_iterations = 0;
+                this->exhausted_max_rounds = 0;
 
                 this->initialise_log_domain_bp();
 
@@ -130,6 +145,7 @@ namespace ldpc {
 
                 // initial bp iterations
                 for (int it = 1; it <= this->initial_iters; it++) {
+                    this->total_bp_iterations++;
                     //check to bit updates
                     for (int i = 0; i < check_count; i++) {
 
@@ -212,6 +228,7 @@ namespace ldpc {
                     this->iterations = it;
 
                     if (this->converge) {
+                        this->initial_bp_converged = true;
                         min_dec_weight = 0;
                         for (int i = 0; i < this->bit_count; i++) {
                             if (this->decoding[i]) {
@@ -254,12 +271,14 @@ namespace ldpc {
 
                 // subsequent rounds
                 for (int round = 0; round < this->max_rounds; round++) {
+                    this->beam_rounds_used = round + 1;
                     int store_idx = 0;
 
                     for (int path_id = 0; path_id < 2 * explore_list.size(); path_id++) {
                         int list_ele = explore_list[path_id / 2];
                         int bit_val = path_id % 2;
                         if (converged_value[start + list_ele] == bit_val) continue;
+                        this->beam_paths_explored++;
                         fixed_values[start + list_ele][round] = bit_val;
                         for (int i = 0; i <= round; i++) {
                             bit_masks[fixed_indices[start + list_ele][i]] = fixed_values[start + list_ele][i];
@@ -287,6 +306,7 @@ namespace ldpc {
 
                         //main interation loop
                         for (int it = 1; it <= this->iters_per_round; it++) {
+                            this->total_bp_iterations++;
                             //check to bit updates
                             for (int i = 0; i < check_count; i++) {
 
@@ -480,6 +500,9 @@ namespace ldpc {
                         start = 0;
                         next_start = 2 * this->beam_width;
                     }
+                }
+                if (!this->initial_bp_converged && this->beam_rounds_used >= this->max_rounds) {
+                    this->exhausted_max_rounds = true;
                 }
                 return this->decoding;
             }

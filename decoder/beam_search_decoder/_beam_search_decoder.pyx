@@ -216,6 +216,25 @@ cdef class BeamSearchDecoderBase:
         """
         return self.bpd.iterations
 
+    @property
+    def initial_bp_converged(self) -> bool:
+        return self.bpd.initial_bp_converged
+
+    @property
+    def beam_rounds_used(self) -> int:
+        return self.bpd.beam_rounds_used
+
+    @property
+    def beam_paths_explored(self) -> int:
+        return self.bpd.beam_paths_explored
+
+    @property
+    def total_bp_iterations(self) -> int:
+        return self.bpd.total_bp_iterations
+
+    @property
+    def exhausted_max_rounds(self) -> bool:
+        return self.bpd.exhausted_max_rounds
 
     @property
     def check_count(self) -> int:
@@ -438,6 +457,11 @@ cdef class BeamSearchDecoder(BeamSearchDecoderBase):
             if self._syndrome[i]: zero_input_vector = False
         if zero_input_vector:
             self.bpd.converge = True
+            self.bpd.initial_bp_converged = True
+            self.bpd.beam_rounds_used = 0
+            self.bpd.beam_paths_explored = 0
+            self.bpd.total_bp_iterations = 0
+            self.bpd.exhausted_max_rounds = False
             return np.zeros(self.bit_count,dtype=DTYPE)
         self.bpd.decode(self._syndrome)
 

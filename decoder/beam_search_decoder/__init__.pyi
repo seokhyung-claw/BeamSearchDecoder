@@ -70,6 +70,20 @@ class BeamSearchDecoderBase:
             int: The number of iterations performed by the decoder.
         """
 
+    @property
+    def initial_bp_converged(self) -> bool: ...
+
+    @property
+    def beam_rounds_used(self) -> int: ...
+
+    @property
+    def beam_paths_explored(self) -> int: ...
+
+    @property
+    def total_bp_iterations(self) -> int: ...
+
+    @property
+    def exhausted_max_rounds(self) -> bool: ...
 
     @property
     def check_count(self) -> int:

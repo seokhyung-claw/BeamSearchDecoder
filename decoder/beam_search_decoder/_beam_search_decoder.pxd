@@ -51,6 +51,11 @@ cdef extern from "beam_search.hpp" namespace "ldpc::bp":
             vector[double] initial_log_prob_ratios
             int iterations
             bool converge
+            bool initial_bp_converged
+            int beam_rounds_used
+            int beam_paths_explored
+            int total_bp_iterations
+            bool exhausted_max_rounds
             vector[uint8_t] decode(vector[uint8_t]& syndrome)
 
 cdef class BeamSearchDecoderBase:
