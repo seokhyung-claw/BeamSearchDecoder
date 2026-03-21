@@ -99,9 +99,9 @@ namespace ldpc {
                     throw std::runtime_error(
                             "Channel probabilities vector must have length equal to the number of bits");
                 }
-                if (this->score_mode < 0 || this->score_mode > 1) {
+                if (this->score_mode < 0 || this->score_mode > 2) {
                     throw std::runtime_error(
-                            "score_mode must be 0 (llr_sum) or 1 (entropy)");
+                            "score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k)");
                 }
             }
 
@@ -426,27 +426,44 @@ namespace ldpc {
 
                         // Compare different paths.
                         double score = 0;
+                        std::vector<double> avg_abs_llrs;
+                        if (this->score_mode == 2) {
+                            avg_abs_llrs.reserve(this->bit_count);
+                        }
                         for (int i = 0; i < this->bit_count; i++) {
                             if (bit_masks[i] == -1) {
                                 if (this->score_mode == 0) {
                                     score += std::abs(LLR_sums[i]);
                                 } else {
                                     double avg_abs_llr = std::abs(LLR_sums[i]) / static_cast<double>(this->iterations);
-                                    if (avg_abs_llr > 50.0) {
-                                        score += 1.0;
+                                    if (this->score_mode == 1) {
+                                        if (avg_abs_llr > 50.0) {
+                                            score += 1.0;
+                                        } else {
+                                            double p1 = 1.0 / (1.0 + std::exp(avg_abs_llr));
+                                            double p0 = 1.0 - p1;
+                                            double entropy = 0.0;
+                                            if (p0 > 0.0) entropy -= p0 * std::log(p0);
+                                            if (p1 > 0.0) entropy -= p1 * std::log(p1);
+                                            score += 1.0 - (entropy / std::log(2.0));
+                                        }
                                     } else {
-                                        double p1 = 1.0 / (1.0 + std::exp(avg_abs_llr));
-                                        double p0 = 1.0 - p1;
-                                        double entropy = 0.0;
-                                        if (p0 > 0.0) entropy -= p0 * std::log(p0);
-                                        if (p1 > 0.0) entropy -= p1 * std::log(p1);
-                                        score += 1.0 - (entropy / std::log(2.0));
+                                        avg_abs_llrs.push_back(avg_abs_llr);
                                     }
                                 }
                             }
                         }
                         if (this->score_mode == 0) {
                             score = score / static_cast<double>(this->iterations);
+                        } else if (this->score_mode == 2) {
+                            int weakest_k = std::min(8, static_cast<int>(avg_abs_llrs.size()));
+                            if (weakest_k > 0) {
+                                std::nth_element(avg_abs_llrs.begin(), avg_abs_llrs.begin() + weakest_k, avg_abs_llrs.end());
+                                for (int i = 0; i < weakest_k; i++) {
+                                    score += avg_abs_llrs[i];
+                                }
+                                score = score / static_cast<double>(weakest_k);
+                            }
                         }
                         if (min_pq.size() >= this->beam_width && score < min_pq.top().first) {
                             // restore the bit_masks vector and the syndrome vector

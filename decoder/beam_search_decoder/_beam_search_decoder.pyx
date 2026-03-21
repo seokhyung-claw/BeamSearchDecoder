@@ -401,8 +401,10 @@ cdef class BeamSearchDecoderBase:
     def score_mode(self, value: int) -> None:
         if not isinstance(value, int):
             raise ValueError("score_mode must be specified as an int.")
-        if value < 0 or value > 1:
-            raise ValueError(f"score_mode must be 0 (llr_sum) or 1 (entropy). Not {value}.")
+        if value < 0 or value > 2:
+            raise ValueError(
+                f"score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). Not {value}."
+            )
         self.bpd.score_mode = value
 
 

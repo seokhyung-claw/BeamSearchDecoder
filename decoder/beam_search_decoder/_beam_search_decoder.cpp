@@ -3218,7 +3218,7 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_codeobj_tab[7];
   PyObject *__pyx_string_tab[127];
-  PyObject *__pyx_number_tab[6];
+  PyObject *__pyx_number_tab[7];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
 PyTypeObject *__pyx_CommonTypesMetaclassType;
@@ -3291,7 +3291,7 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_u_numpy__core_multiarray_failed_to __pyx_string_tab[29]
 #define __pyx_kp_u_numpy__core_umath_failed_to_impo __pyx_string_tab[30]
 #define __pyx_kp_u_passed_to_the_BeamSearchDecoder __pyx_string_tab[31]
-#define __pyx_kp_u_score_mode_must_be_0_llr_sum_or __pyx_string_tab[32]
+#define __pyx_kp_u_score_mode_must_be_0_llr_sum_1_e __pyx_string_tab[32]
 #define __pyx_kp_u_score_mode_must_be_specified_as __pyx_string_tab[33]
 #define __pyx_kp_u_stringsource __pyx_string_tab[34]
 #define __pyx_n_u_BeamSearchDecoder __pyx_string_tab[35]
@@ -3388,10 +3388,11 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_b_iso88591_a_A_Cq_E_aq_5_AQ_t_Qd_6a_1_L_A __pyx_string_tab[126]
 #define __pyx_int_0 __pyx_number_tab[0]
 #define __pyx_int_1 __pyx_number_tab[1]
-#define __pyx_int_8 __pyx_number_tab[2]
-#define __pyx_int_10 __pyx_number_tab[3]
-#define __pyx_int_20 __pyx_number_tab[4]
-#define __pyx_int_30 __pyx_number_tab[5]
+#define __pyx_int_2 __pyx_number_tab[2]
+#define __pyx_int_8 __pyx_number_tab[3]
+#define __pyx_int_10 __pyx_number_tab[4]
+#define __pyx_int_20 __pyx_number_tab[5]
+#define __pyx_int_30 __pyx_number_tab[6]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -3428,7 +3429,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_type_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder);
   for (int i=0; i<7; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
   for (int i=0; i<127; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
-  for (int i=0; i<6; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
+  for (int i=0; i<7; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
 Py_CLEAR(clear_module_state->__pyx_CommonTypesMetaclassType);
@@ -3473,7 +3474,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_type_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder);
   for (int i=0; i<7; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
   for (int i=0; i<127; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
-  for (int i=0; i<6; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
+  for (int i=0; i<7; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
 Py_VISIT(traverse_module_state->__pyx_CommonTypesMetaclassType);
@@ -9701,7 +9702,7 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_21BeamSearchDec
  *     def score_mode(self, value: int) -> None:
  *         if not isinstance(value, int):             # <<<<<<<<<<<<<<
  *             raise ValueError("score_mode must be specified as an int.")
- *         if value < 0 or value > 1:
+ *         if value < 0 or value > 2:
 */
   __pyx_t_1 = PyLong_Check(__pyx_v_value); 
   __pyx_t_2 = (!__pyx_t_1);
@@ -9711,8 +9712,8 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_21BeamSearchDec
  *     def score_mode(self, value: int) -> None:
  *         if not isinstance(value, int):
  *             raise ValueError("score_mode must be specified as an int.")             # <<<<<<<<<<<<<<
- *         if value < 0 or value > 1:
- *             raise ValueError(f"score_mode must be 0 (llr_sum) or 1 (entropy). Not {value}.")
+ *         if value < 0 or value > 2:
+ *             raise ValueError(
 */
     __pyx_t_4 = NULL;
     __pyx_t_5 = 1;
@@ -9732,16 +9733,16 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_21BeamSearchDec
  *     def score_mode(self, value: int) -> None:
  *         if not isinstance(value, int):             # <<<<<<<<<<<<<<
  *             raise ValueError("score_mode must be specified as an int.")
- *         if value < 0 or value > 1:
+ *         if value < 0 or value > 2:
 */
   }
 
   /* "beam_search_decoder/_beam_search_decoder.pyx":404
  *         if not isinstance(value, int):
  *             raise ValueError("score_mode must be specified as an int.")
- *         if value < 0 or value > 1:             # <<<<<<<<<<<<<<
- *             raise ValueError(f"score_mode must be 0 (llr_sum) or 1 (entropy). Not {value}.")
- *         self.bpd.score_mode = value
+ *         if value < 0 or value > 2:             # <<<<<<<<<<<<<<
+ *             raise ValueError(
+ *                 f"score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). Not {value}."
 */
   __pyx_t_3 = PyObject_RichCompare(__pyx_v_value, __pyx_mstate_global->__pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
   __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 404, __pyx_L1_error)
@@ -9751,7 +9752,7 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_21BeamSearchDec
     __pyx_t_2 = __pyx_t_1;
     goto __pyx_L5_bool_binop_done;
   }
-  __pyx_t_3 = PyObject_RichCompare(__pyx_v_value, __pyx_mstate_global->__pyx_int_1, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_value, __pyx_mstate_global->__pyx_int_2, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
   __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_2 = __pyx_t_1;
@@ -9760,19 +9761,27 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_21BeamSearchDec
 
     /* "beam_search_decoder/_beam_search_decoder.pyx":405
  *             raise ValueError("score_mode must be specified as an int.")
- *         if value < 0 or value > 1:
- *             raise ValueError(f"score_mode must be 0 (llr_sum) or 1 (entropy). Not {value}.")             # <<<<<<<<<<<<<<
- *         self.bpd.score_mode = value
- * 
+ *         if value < 0 or value > 2:
+ *             raise ValueError(             # <<<<<<<<<<<<<<
+ *                 f"score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). Not {value}."
+ *             )
 */
     __pyx_t_4 = NULL;
-    __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_v_value, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 405, __pyx_L1_error)
+
+    /* "beam_search_decoder/_beam_search_decoder.pyx":406
+ *         if value < 0 or value > 2:
+ *             raise ValueError(
+ *                 f"score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). Not {value}."             # <<<<<<<<<<<<<<
+ *             )
+ *         self.bpd.score_mode = value
+*/
+    __pyx_t_6 = __Pyx_PyObject_FormatSimple(__pyx_v_value, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7[0] = __pyx_mstate_global->__pyx_kp_u_score_mode_must_be_0_llr_sum_or;
+    __pyx_t_7[0] = __pyx_mstate_global->__pyx_kp_u_score_mode_must_be_0_llr_sum_1_e;
     __pyx_t_7[1] = __pyx_t_6;
     __pyx_t_7[2] = __pyx_mstate_global->__pyx_kp_u_;
-    __pyx_t_8 = __Pyx_PyUnicode_Join(__pyx_t_7, 3, 51 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6));
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 405, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyUnicode_Join(__pyx_t_7, 3, 67 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_6) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_6));
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 406, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_5 = 1;
@@ -9791,20 +9800,20 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_21BeamSearchDec
     /* "beam_search_decoder/_beam_search_decoder.pyx":404
  *         if not isinstance(value, int):
  *             raise ValueError("score_mode must be specified as an int.")
- *         if value < 0 or value > 1:             # <<<<<<<<<<<<<<
- *             raise ValueError(f"score_mode must be 0 (llr_sum) or 1 (entropy). Not {value}.")
- *         self.bpd.score_mode = value
+ *         if value < 0 or value > 2:             # <<<<<<<<<<<<<<
+ *             raise ValueError(
+ *                 f"score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). Not {value}."
 */
   }
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":406
- *         if value < 0 or value > 1:
- *             raise ValueError(f"score_mode must be 0 (llr_sum) or 1 (entropy). Not {value}.")
+  /* "beam_search_decoder/_beam_search_decoder.pyx":408
+ *                 f"score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). Not {value}."
+ *             )
  *         self.bpd.score_mode = value             # <<<<<<<<<<<<<<
  * 
  * 
 */
-  __pyx_t_9 = __Pyx_PyLong_As_int(__pyx_v_value); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyLong_As_int(__pyx_v_value); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 408, __pyx_L1_error)
   __pyx_v_self->bpd->score_mode = __pyx_t_9;
 
   /* "beam_search_decoder/_beam_search_decoder.pyx":400
@@ -10036,7 +10045,7 @@ static PyObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_21BeamSea
   return __pyx_r;
 }
 
-/* "beam_search_decoder/_beam_search_decoder.pyx":425
+/* "beam_search_decoder/_beam_search_decoder.pyx":427
  *     """
  * 
  *     def __cinit__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],             # <<<<<<<<<<<<<<
@@ -10076,48 +10085,48 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_pcm,&__pyx_mstate_global->__pyx_n_u_error_channel,&__pyx_mstate_global->__pyx_n_u_max_rounds,&__pyx_mstate_global->__pyx_n_u_beam_width,&__pyx_mstate_global->__pyx_n_u_num_results,&__pyx_mstate_global->__pyx_n_u_initial_iters,&__pyx_mstate_global->__pyx_n_u_iters_per_round,&__pyx_mstate_global->__pyx_n_u_score_mode,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_VARARGS(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 425, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 427, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  8:
         values[7] = __Pyx_ArgRef_VARARGS(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_VARARGS(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_VARARGS(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_VARARGS(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_VARARGS(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_VARARGS(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values, kwd_pos_args, __pyx_kwds_len, "__cinit__", 1) < (0)) __PYX_ERR(0, 425, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values, kwd_pos_args, __pyx_kwds_len, "__cinit__", 1) < (0)) __PYX_ERR(0, 427, __pyx_L3_error)
 
-      /* "beam_search_decoder/_beam_search_decoder.pyx":426
+      /* "beam_search_decoder/_beam_search_decoder.pyx":428
  * 
  *     def __cinit__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],
  *                  error_channel: Optional[Union[np.ndarray,List[float]]] = None, max_rounds: Optional[int] = 10,             # <<<<<<<<<<<<<<
@@ -10132,41 +10141,41 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
       if (!values[6]) values[6] = __Pyx_NewRef(((PyObject*)__pyx_mstate_global->__pyx_int_20));
       if (!values[7]) values[7] = __Pyx_NewRef(((PyObject*)__pyx_mstate_global->__pyx_int_0));
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 8, i); __PYX_ERR(0, 425, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 8, i); __PYX_ERR(0, 427, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  8:
         values[7] = __Pyx_ArgRef_VARARGS(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_VARARGS(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_VARARGS(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_VARARGS(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_VARARGS(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_VARARGS(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 425, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 427, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
@@ -10180,22 +10189,22 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
     }
     __pyx_v_pcm = values[0];
     __pyx_v_error_channel = values[1];
-    if (__Pyx_PyInt_FromNumber(&values[2], "max_rounds", 1) < (0)) __PYX_ERR(0, 426, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[2], "max_rounds", 1) < (0)) __PYX_ERR(0, 428, __pyx_L3_error)
     __pyx_v_max_rounds = ((PyObject*)values[2]);
-    if (__Pyx_PyInt_FromNumber(&values[3], "beam_width", 1) < (0)) __PYX_ERR(0, 427, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[3], "beam_width", 1) < (0)) __PYX_ERR(0, 429, __pyx_L3_error)
     __pyx_v_beam_width = ((PyObject*)values[3]);
-    if (__Pyx_PyInt_FromNumber(&values[4], "num_results", 1) < (0)) __PYX_ERR(0, 427, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[4], "num_results", 1) < (0)) __PYX_ERR(0, 429, __pyx_L3_error)
     __pyx_v_num_results = ((PyObject*)values[4]);
-    if (__Pyx_PyInt_FromNumber(&values[5], "initial_iters", 1) < (0)) __PYX_ERR(0, 427, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[5], "initial_iters", 1) < (0)) __PYX_ERR(0, 429, __pyx_L3_error)
     __pyx_v_initial_iters = ((PyObject*)values[5]);
-    if (__Pyx_PyInt_FromNumber(&values[6], "iters_per_round", 1) < (0)) __PYX_ERR(0, 428, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[6], "iters_per_round", 1) < (0)) __PYX_ERR(0, 430, __pyx_L3_error)
     __pyx_v_iters_per_round = ((PyObject*)values[6]);
-    if (__Pyx_PyInt_FromNumber(&values[7], "score_mode", 1) < (0)) __PYX_ERR(0, 428, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[7], "score_mode", 1) < (0)) __PYX_ERR(0, 430, __pyx_L3_error)
     __pyx_v_score_mode = ((PyObject*)values[7]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 8, __pyx_nargs); __PYX_ERR(0, 425, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 1, 8, __pyx_nargs); __PYX_ERR(0, 427, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10207,15 +10216,15 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_max_rounds), (&PyLong_Type), 1, "max_rounds", 2))) __PYX_ERR(0, 426, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_beam_width), (&PyLong_Type), 1, "beam_width", 2))) __PYX_ERR(0, 427, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_num_results), (&PyLong_Type), 1, "num_results", 2))) __PYX_ERR(0, 427, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_initial_iters), (&PyLong_Type), 1, "initial_iters", 2))) __PYX_ERR(0, 427, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_iters_per_round), (&PyLong_Type), 1, "iters_per_round", 2))) __PYX_ERR(0, 428, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_score_mode), (&PyLong_Type), 1, "score_mode", 2))) __PYX_ERR(0, 428, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_max_rounds), (&PyLong_Type), 1, "max_rounds", 2))) __PYX_ERR(0, 428, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_beam_width), (&PyLong_Type), 1, "beam_width", 2))) __PYX_ERR(0, 429, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_num_results), (&PyLong_Type), 1, "num_results", 2))) __PYX_ERR(0, 429, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_initial_iters), (&PyLong_Type), 1, "initial_iters", 2))) __PYX_ERR(0, 429, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_iters_per_round), (&PyLong_Type), 1, "iters_per_round", 2))) __PYX_ERR(0, 430, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_score_mode), (&PyLong_Type), 1, "score_mode", 2))) __PYX_ERR(0, 430, __pyx_L1_error)
   __pyx_r = __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDecoder___cinit__(((struct __pyx_obj_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder *)__pyx_v_self), __pyx_v_pcm, __pyx_v_error_channel, __pyx_v_max_rounds, __pyx_v_beam_width, __pyx_v_num_results, __pyx_v_initial_iters, __pyx_v_iters_per_round, __pyx_v_score_mode, __pyx_v_kwargs);
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":425
+  /* "beam_search_decoder/_beam_search_decoder.pyx":427
  *     """
  * 
  *     def __cinit__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],             # <<<<<<<<<<<<<<
@@ -10263,7 +10272,7 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":430
+  /* "beam_search_decoder/_beam_search_decoder.pyx":432
  *                  iters_per_round: Optional[int] = 20, score_mode: Optional[int] = 0, **kwargs):
  * 
  *         for key in kwargs.keys():             # <<<<<<<<<<<<<<
@@ -10271,7 +10280,7 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
  *                 raise ValueError(f"Unknown parameter '{key}' passed to the BeamSearchDecoder constructor.")
 */
   __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_mstate_global->__pyx_n_u_keys, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 430, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_kwargs, 1, __pyx_mstate_global->__pyx_n_u_keys, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 432, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -10279,12 +10288,12 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   while (1) {
     __pyx_t_6 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, NULL, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_6 == 0)) break;
-    if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 430, __pyx_L1_error)
+    if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 432, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":431
+    /* "beam_search_decoder/_beam_search_decoder.pyx":433
  * 
  *         for key in kwargs.keys():
  *             if key not in ["channel_probs"]:             # <<<<<<<<<<<<<<
@@ -10293,12 +10302,12 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
 */
     __Pyx_INCREF(__pyx_v_key);
     __pyx_t_5 = __pyx_v_key;
-    __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_channel_probs, Py_NE)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 431, __pyx_L1_error)
+    __pyx_t_7 = (__Pyx_PyUnicode_Equals(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_channel_probs, Py_NE)); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 433, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_8 = __pyx_t_7;
     if (unlikely(__pyx_t_8)) {
 
-      /* "beam_search_decoder/_beam_search_decoder.pyx":432
+      /* "beam_search_decoder/_beam_search_decoder.pyx":434
  *         for key in kwargs.keys():
  *             if key not in ["channel_probs"]:
  *                 raise ValueError(f"Unknown parameter '{key}' passed to the BeamSearchDecoder constructor.")             # <<<<<<<<<<<<<<
@@ -10306,13 +10315,13 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
  *         pass
 */
       __pyx_t_9 = NULL;
-      __pyx_t_10 = __Pyx_PyObject_FormatSimple(__pyx_v_key, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 432, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_FormatSimple(__pyx_v_key, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 434, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __pyx_t_11[0] = __pyx_mstate_global->__pyx_kp_u_Unknown_parameter;
       __pyx_t_11[1] = __pyx_t_10;
       __pyx_t_11[2] = __pyx_mstate_global->__pyx_kp_u_passed_to_the_BeamSearchDecoder;
       __pyx_t_12 = __Pyx_PyUnicode_Join(__pyx_t_11, 3, 19 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_10) + 46, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_10));
-      if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 432, __pyx_L1_error)
+      if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 434, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_13 = 1;
@@ -10321,14 +10330,14 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
         __pyx_t_5 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_13, (2-__pyx_t_13) | (__pyx_t_13*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 432, __pyx_L1_error)
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 434, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
       }
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __PYX_ERR(0, 432, __pyx_L1_error)
+      __PYX_ERR(0, 434, __pyx_L1_error)
 
-      /* "beam_search_decoder/_beam_search_decoder.pyx":431
+      /* "beam_search_decoder/_beam_search_decoder.pyx":433
  * 
  *         for key in kwargs.keys():
  *             if key not in ["channel_probs"]:             # <<<<<<<<<<<<<<
@@ -10339,7 +10348,7 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":425
+  /* "beam_search_decoder/_beam_search_decoder.pyx":427
  *     """
  * 
  *     def __cinit__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],             # <<<<<<<<<<<<<<
@@ -10364,7 +10373,7 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   return __pyx_r;
 }
 
-/* "beam_search_decoder/_beam_search_decoder.pyx":436
+/* "beam_search_decoder/_beam_search_decoder.pyx":438
  *         pass
  * 
  *     def __init__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],             # <<<<<<<<<<<<<<
@@ -10402,48 +10411,48 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_pcm,&__pyx_mstate_global->__pyx_n_u_error_channel,&__pyx_mstate_global->__pyx_n_u_max_rounds,&__pyx_mstate_global->__pyx_n_u_beam_width,&__pyx_mstate_global->__pyx_n_u_num_results,&__pyx_mstate_global->__pyx_n_u_initial_iters,&__pyx_mstate_global->__pyx_n_u_iters_per_round,&__pyx_mstate_global->__pyx_n_u_score_mode,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_VARARGS(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 436, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 438, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  8:
         values[7] = __Pyx_ArgRef_VARARGS(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_VARARGS(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_VARARGS(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_VARARGS(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_VARARGS(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_VARARGS(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values, kwd_pos_args, __pyx_kwds_len, "__init__", 1) < (0)) __PYX_ERR(0, 436, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, __pyx_v_kwargs, values, kwd_pos_args, __pyx_kwds_len, "__init__", 1) < (0)) __PYX_ERR(0, 438, __pyx_L3_error)
 
-      /* "beam_search_decoder/_beam_search_decoder.pyx":437
+      /* "beam_search_decoder/_beam_search_decoder.pyx":439
  * 
  *     def __init__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],
  *                  error_channel: Optional[Union[np.ndarray,List[float]]] = None, max_rounds: Optional[int] = 10,             # <<<<<<<<<<<<<<
@@ -10458,41 +10467,41 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
       if (!values[6]) values[6] = __Pyx_NewRef(((PyObject*)__pyx_mstate_global->__pyx_int_20));
       if (!values[7]) values[7] = __Pyx_NewRef(((PyObject*)__pyx_mstate_global->__pyx_int_0));
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 8, i); __PYX_ERR(0, 436, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 8, i); __PYX_ERR(0, 438, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  8:
         values[7] = __Pyx_ArgRef_VARARGS(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_VARARGS(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_VARARGS(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_VARARGS(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_VARARGS(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_VARARGS(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 438, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 436, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 438, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
@@ -10506,22 +10515,22 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
     }
     __pyx_v_pcm = values[0];
     __pyx_v_error_channel = values[1];
-    if (__Pyx_PyInt_FromNumber(&values[2], "max_rounds", 1) < (0)) __PYX_ERR(0, 437, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[2], "max_rounds", 1) < (0)) __PYX_ERR(0, 439, __pyx_L3_error)
     __pyx_v_max_rounds = ((PyObject*)values[2]);
-    if (__Pyx_PyInt_FromNumber(&values[3], "beam_width", 1) < (0)) __PYX_ERR(0, 438, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[3], "beam_width", 1) < (0)) __PYX_ERR(0, 440, __pyx_L3_error)
     __pyx_v_beam_width = ((PyObject*)values[3]);
-    if (__Pyx_PyInt_FromNumber(&values[4], "num_results", 1) < (0)) __PYX_ERR(0, 438, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[4], "num_results", 1) < (0)) __PYX_ERR(0, 440, __pyx_L3_error)
     __pyx_v_num_results = ((PyObject*)values[4]);
-    if (__Pyx_PyInt_FromNumber(&values[5], "initial_iters", 1) < (0)) __PYX_ERR(0, 438, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[5], "initial_iters", 1) < (0)) __PYX_ERR(0, 440, __pyx_L3_error)
     __pyx_v_initial_iters = ((PyObject*)values[5]);
-    if (__Pyx_PyInt_FromNumber(&values[6], "iters_per_round", 1) < (0)) __PYX_ERR(0, 439, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[6], "iters_per_round", 1) < (0)) __PYX_ERR(0, 441, __pyx_L3_error)
     __pyx_v_iters_per_round = ((PyObject*)values[6]);
-    if (__Pyx_PyInt_FromNumber(&values[7], "score_mode", 1) < (0)) __PYX_ERR(0, 439, __pyx_L3_error)
+    if (__Pyx_PyInt_FromNumber(&values[7], "score_mode", 1) < (0)) __PYX_ERR(0, 441, __pyx_L3_error)
     __pyx_v_score_mode = ((PyObject*)values[7]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 8, __pyx_nargs); __PYX_ERR(0, 436, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 8, __pyx_nargs); __PYX_ERR(0, 438, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10533,15 +10542,15 @@ static int __pyx_pw_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_max_rounds), (&PyLong_Type), 1, "max_rounds", 2))) __PYX_ERR(0, 437, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_beam_width), (&PyLong_Type), 1, "beam_width", 2))) __PYX_ERR(0, 438, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_num_results), (&PyLong_Type), 1, "num_results", 2))) __PYX_ERR(0, 438, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_initial_iters), (&PyLong_Type), 1, "initial_iters", 2))) __PYX_ERR(0, 438, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_iters_per_round), (&PyLong_Type), 1, "iters_per_round", 2))) __PYX_ERR(0, 439, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_score_mode), (&PyLong_Type), 1, "score_mode", 2))) __PYX_ERR(0, 439, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_max_rounds), (&PyLong_Type), 1, "max_rounds", 2))) __PYX_ERR(0, 439, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_beam_width), (&PyLong_Type), 1, "beam_width", 2))) __PYX_ERR(0, 440, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_num_results), (&PyLong_Type), 1, "num_results", 2))) __PYX_ERR(0, 440, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_initial_iters), (&PyLong_Type), 1, "initial_iters", 2))) __PYX_ERR(0, 440, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_iters_per_round), (&PyLong_Type), 1, "iters_per_round", 2))) __PYX_ERR(0, 441, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_score_mode), (&PyLong_Type), 1, "score_mode", 2))) __PYX_ERR(0, 441, __pyx_L1_error)
   __pyx_r = __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDecoder_2__init__(((struct __pyx_obj_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder *)__pyx_v_self), __pyx_v_pcm, __pyx_v_error_channel, __pyx_v_max_rounds, __pyx_v_beam_width, __pyx_v_num_results, __pyx_v_initial_iters, __pyx_v_iters_per_round, __pyx_v_score_mode, __pyx_v_kwargs);
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":436
+  /* "beam_search_decoder/_beam_search_decoder.pyx":438
  *         pass
  * 
  *     def __init__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],             # <<<<<<<<<<<<<<
@@ -10575,7 +10584,7 @@ static int __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDec
   return __pyx_r;
 }
 
-/* "beam_search_decoder/_beam_search_decoder.pyx":443
+/* "beam_search_decoder/_beam_search_decoder.pyx":445
  *         pass
  * 
  *     def decode(self, input_vector: np.ndarray) -> np.ndarray:             # <<<<<<<<<<<<<<
@@ -10623,32 +10632,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_input_vector,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 443, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 445, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 443, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 445, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "decode", 0) < (0)) __PYX_ERR(0, 443, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "decode", 0) < (0)) __PYX_ERR(0, 445, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("decode", 1, 1, 1, i); __PYX_ERR(0, 443, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("decode", 1, 1, 1, i); __PYX_ERR(0, 445, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 443, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 445, __pyx_L3_error)
     }
     __pyx_v_input_vector = ((PyArrayObject *)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("decode", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 443, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("decode", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 445, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10659,7 +10668,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_input_vector), __pyx_mstate_global->__pyx_ptype_5numpy_ndarray, 0, "input_vector", 0))) __PYX_ERR(0, 443, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_input_vector), __pyx_mstate_global->__pyx_ptype_5numpy_ndarray, 0, "input_vector", 0))) __PYX_ERR(0, 445, __pyx_L1_error)
   __pyx_r = __pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDecoder_4decode(((struct __pyx_obj_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder *)__pyx_v_self), __pyx_v_input_vector);
 
   /* function exit code */
@@ -10704,7 +10713,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("decode", 0);
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":464
+  /* "beam_search_decoder/_beam_search_decoder.pyx":466
  * 
  *         cdef int i
  *         cdef bool zero_input_vector = True             # <<<<<<<<<<<<<<
@@ -10713,29 +10722,29 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
   __pyx_v_zero_input_vector = 1;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":465
+  /* "beam_search_decoder/_beam_search_decoder.pyx":467
  *         cdef int i
  *         cdef bool zero_input_vector = True
  *         DTYPE = input_vector.dtype             # <<<<<<<<<<<<<<
  * 
  *         cdef int len_input_vector = len(input_vector)
 */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_input_vector), __pyx_mstate_global->__pyx_n_u_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 465, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_input_vector), __pyx_mstate_global->__pyx_n_u_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 467, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_DTYPE = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":467
+  /* "beam_search_decoder/_beam_search_decoder.pyx":469
  *         DTYPE = input_vector.dtype
  * 
  *         cdef int len_input_vector = len(input_vector)             # <<<<<<<<<<<<<<
  * 
  *         for i in range(len_input_vector):
 */
-  __pyx_t_2 = PyObject_Length(((PyObject *)__pyx_v_input_vector)); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 467, __pyx_L1_error)
+  __pyx_t_2 = PyObject_Length(((PyObject *)__pyx_v_input_vector)); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 469, __pyx_L1_error)
   __pyx_v_len_input_vector = __pyx_t_2;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":469
+  /* "beam_search_decoder/_beam_search_decoder.pyx":471
  *         cdef int len_input_vector = len(input_vector)
  * 
  *         for i in range(len_input_vector):             # <<<<<<<<<<<<<<
@@ -10747,20 +10756,20 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":470
+    /* "beam_search_decoder/_beam_search_decoder.pyx":472
  * 
  *         for i in range(len_input_vector):
  *             self._syndrome[i] = input_vector[i]             # <<<<<<<<<<<<<<
  *             if self._syndrome[i]: zero_input_vector = False
  *         if zero_input_vector:
 */
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_input_vector), __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 470, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_input_vector), __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 472, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = __Pyx_PyLong_As_npy_uint8(__pyx_t_1); if (unlikely((__pyx_t_6 == ((npy_uint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 470, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyLong_As_npy_uint8(__pyx_t_1); if (unlikely((__pyx_t_6 == ((npy_uint8)-1)) && PyErr_Occurred())) __PYX_ERR(0, 472, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     (__pyx_v_self->__pyx_base._syndrome[__pyx_v_i]) = __pyx_t_6;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":471
+    /* "beam_search_decoder/_beam_search_decoder.pyx":473
  *         for i in range(len_input_vector):
  *             self._syndrome[i] = input_vector[i]
  *             if self._syndrome[i]: zero_input_vector = False             # <<<<<<<<<<<<<<
@@ -10773,7 +10782,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
     }
   }
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":472
+  /* "beam_search_decoder/_beam_search_decoder.pyx":474
  *             self._syndrome[i] = input_vector[i]
  *             if self._syndrome[i]: zero_input_vector = False
  *         if zero_input_vector:             # <<<<<<<<<<<<<<
@@ -10783,7 +10792,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
   __pyx_t_7 = (__pyx_v_zero_input_vector != 0);
   if (__pyx_t_7) {
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":473
+    /* "beam_search_decoder/_beam_search_decoder.pyx":475
  *             if self._syndrome[i]: zero_input_vector = False
  *         if zero_input_vector:
  *             self.bpd.converge = True             # <<<<<<<<<<<<<<
@@ -10792,7 +10801,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
     __pyx_v_self->__pyx_base.bpd->converge = 1;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":474
+    /* "beam_search_decoder/_beam_search_decoder.pyx":476
  *         if zero_input_vector:
  *             self.bpd.converge = True
  *             self.bpd.initial_bp_converged = True             # <<<<<<<<<<<<<<
@@ -10801,7 +10810,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
     __pyx_v_self->__pyx_base.bpd->initial_bp_converged = 1;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":475
+    /* "beam_search_decoder/_beam_search_decoder.pyx":477
  *             self.bpd.converge = True
  *             self.bpd.initial_bp_converged = True
  *             self.bpd.beam_rounds_used = 0             # <<<<<<<<<<<<<<
@@ -10810,7 +10819,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
     __pyx_v_self->__pyx_base.bpd->beam_rounds_used = 0;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":476
+    /* "beam_search_decoder/_beam_search_decoder.pyx":478
  *             self.bpd.initial_bp_converged = True
  *             self.bpd.beam_rounds_used = 0
  *             self.bpd.beam_paths_explored = 0             # <<<<<<<<<<<<<<
@@ -10819,7 +10828,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
     __pyx_v_self->__pyx_base.bpd->beam_paths_explored = 0;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":477
+    /* "beam_search_decoder/_beam_search_decoder.pyx":479
  *             self.bpd.beam_rounds_used = 0
  *             self.bpd.beam_paths_explored = 0
  *             self.bpd.total_bp_iterations = 0             # <<<<<<<<<<<<<<
@@ -10828,7 +10837,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
     __pyx_v_self->__pyx_base.bpd->total_bp_iterations = 0;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":478
+    /* "beam_search_decoder/_beam_search_decoder.pyx":480
  *             self.bpd.beam_paths_explored = 0
  *             self.bpd.total_bp_iterations = 0
  *             self.bpd.exhausted_max_rounds = False             # <<<<<<<<<<<<<<
@@ -10837,7 +10846,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
     __pyx_v_self->__pyx_base.bpd->exhausted_max_rounds = 0;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":479
+    /* "beam_search_decoder/_beam_search_decoder.pyx":481
  *             self.bpd.total_bp_iterations = 0
  *             self.bpd.exhausted_max_rounds = False
  *             return np.zeros(self.bit_count,dtype=DTYPE)             # <<<<<<<<<<<<<<
@@ -10846,12 +10855,12 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
     __Pyx_XDECREF((PyObject *)__pyx_r);
     __pyx_t_8 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 479, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 479, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_bit_count); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 479, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_bit_count); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 481, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_11 = 1;
     #if CYTHON_UNPACK_METHODS
@@ -10867,23 +10876,23 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
     #endif
     {
       PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_8, __pyx_t_9};
-      __pyx_t_12 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 479, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 481, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_v_DTYPE, __pyx_t_12, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 479, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_v_DTYPE, __pyx_t_12, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 481, __pyx_L1_error)
       __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_10, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_12);
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 479, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 481, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
-    if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 479, __pyx_L1_error)
+    if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 481, __pyx_L1_error)
     __pyx_r = ((PyArrayObject *)__pyx_t_1);
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":472
+    /* "beam_search_decoder/_beam_search_decoder.pyx":474
  *             self._syndrome[i] = input_vector[i]
  *             if self._syndrome[i]: zero_input_vector = False
  *         if zero_input_vector:             # <<<<<<<<<<<<<<
@@ -10892,7 +10901,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
   }
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":480
+  /* "beam_search_decoder/_beam_search_decoder.pyx":482
  *             self.bpd.exhausted_max_rounds = False
  *             return np.zeros(self.bit_count,dtype=DTYPE)
  *         self.bpd.decode(self._syndrome)             # <<<<<<<<<<<<<<
@@ -10901,7 +10910,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
 */
   (void)(__pyx_v_self->__pyx_base.bpd->decode(__pyx_v_self->__pyx_base._syndrome));
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":482
+  /* "beam_search_decoder/_beam_search_decoder.pyx":484
  *         self.bpd.decode(self._syndrome)
  * 
  *         out = np.zeros(self.n,dtype=DTYPE)             # <<<<<<<<<<<<<<
@@ -10909,12 +10918,12 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
  *         return out
 */
   __pyx_t_10 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyLong_From_int(__pyx_v_self->__pyx_base.n); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 482, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyLong_From_int(__pyx_v_self->__pyx_base.n); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_t_11 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -10930,21 +10939,21 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
   #endif
   {
     PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_10, __pyx_t_12};
-    __pyx_t_8 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 482, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 484, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_v_DTYPE, __pyx_t_8, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 482, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_v_DTYPE, __pyx_t_8, __pyx_callargs+2, 0) < (0)) __PYX_ERR(0, 484, __pyx_L1_error)
     __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_9, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_8);
     __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 484, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_out = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":483
+  /* "beam_search_decoder/_beam_search_decoder.pyx":485
  * 
  *         out = np.zeros(self.n,dtype=DTYPE)
  *         for i in range(self.n): out[i] = self.bpd.decoding[i]             # <<<<<<<<<<<<<<
@@ -10955,13 +10964,13 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
   __pyx_t_4 = __pyx_t_3;
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
     __pyx_v_i = __pyx_t_5;
-    __pyx_t_1 = __Pyx_PyLong_From_npy_uint8((__pyx_v_self->__pyx_base.bpd->decoding[__pyx_v_i])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyLong_From_npy_uint8((__pyx_v_self->__pyx_base.bpd->decoding[__pyx_v_i])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely((__Pyx_SetItemInt(__pyx_v_out, __pyx_v_i, __pyx_t_1, int, 1, __Pyx_PyLong_From_int, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference) < 0))) __PYX_ERR(0, 483, __pyx_L1_error)
+    if (unlikely((__Pyx_SetItemInt(__pyx_v_out, __pyx_v_i, __pyx_t_1, int, 1, __Pyx_PyLong_From_int, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference) < 0))) __PYX_ERR(0, 485, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":484
+  /* "beam_search_decoder/_beam_search_decoder.pyx":486
  *         out = np.zeros(self.n,dtype=DTYPE)
  *         for i in range(self.n): out[i] = self.bpd.decoding[i]
  *         return out             # <<<<<<<<<<<<<<
@@ -10969,12 +10978,12 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
  * 
 */
   __Pyx_XDECREF((PyObject *)__pyx_r);
-  if (!(likely(((__pyx_v_out) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_out, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 484, __pyx_L1_error)
+  if (!(likely(((__pyx_v_out) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_out, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 486, __pyx_L1_error)
   __Pyx_INCREF(__pyx_v_out);
   __pyx_r = ((PyArrayObject *)__pyx_v_out);
   goto __pyx_L0;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":443
+  /* "beam_search_decoder/_beam_search_decoder.pyx":445
  *         pass
  * 
  *     def decode(self, input_vector: np.ndarray) -> np.ndarray:             # <<<<<<<<<<<<<<
@@ -10999,7 +11008,7 @@ static PyArrayObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17Be
   return __pyx_r;
 }
 
-/* "beam_search_decoder/_beam_search_decoder.pyx":487
+/* "beam_search_decoder/_beam_search_decoder.pyx":489
  * 
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -11042,7 +11051,7 @@ static PyObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSea
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":495
+  /* "beam_search_decoder/_beam_search_decoder.pyx":497
  *             np.ndarray: A numpy array containing the current decoded output.
  *         """
  *         out = np.zeros(self.n).astype(int)             # <<<<<<<<<<<<<<
@@ -11050,12 +11059,12 @@ static PyObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSea
  *             out[i] = self.bpd.decoding[i]
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_self->__pyx_base.n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_self->__pyx_base.n); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 497, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_7 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -11075,7 +11084,7 @@ static PyObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSea
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 495, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 497, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_t_2 = __pyx_t_3;
@@ -11086,13 +11095,13 @@ static PyObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSea
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_astype, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 495, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_out = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":496
+  /* "beam_search_decoder/_beam_search_decoder.pyx":498
  *         """
  *         out = np.zeros(self.n).astype(int)
  *         for i in range(self.n):             # <<<<<<<<<<<<<<
@@ -11104,19 +11113,19 @@ static PyObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSea
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_i = __pyx_t_10;
 
-    /* "beam_search_decoder/_beam_search_decoder.pyx":497
+    /* "beam_search_decoder/_beam_search_decoder.pyx":499
  *         out = np.zeros(self.n).astype(int)
  *         for i in range(self.n):
  *             out[i] = self.bpd.decoding[i]             # <<<<<<<<<<<<<<
  *         return out
 */
-    __pyx_t_1 = __Pyx_PyLong_From_npy_uint8((__pyx_v_self->__pyx_base.bpd->decoding[__pyx_v_i])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyLong_From_npy_uint8((__pyx_v_self->__pyx_base.bpd->decoding[__pyx_v_i])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 499, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely((__Pyx_SetItemInt(__pyx_v_out, __pyx_v_i, __pyx_t_1, int, 1, __Pyx_PyLong_From_int, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference) < 0))) __PYX_ERR(0, 497, __pyx_L1_error)
+    if (unlikely((__Pyx_SetItemInt(__pyx_v_out, __pyx_v_i, __pyx_t_1, int, 1, __Pyx_PyLong_From_int, 0, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference) < 0))) __PYX_ERR(0, 499, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":498
+  /* "beam_search_decoder/_beam_search_decoder.pyx":500
  *         for i in range(self.n):
  *             out[i] = self.bpd.decoding[i]
  *         return out             # <<<<<<<<<<<<<<
@@ -11126,7 +11135,7 @@ static PyObject *__pyx_pf_19beam_search_decoder_20_beam_search_decoder_17BeamSea
   __pyx_r = __pyx_v_out;
   goto __pyx_L0;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":487
+  /* "beam_search_decoder/_beam_search_decoder.pyx":489
  * 
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -11883,12 +11892,12 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_BeamSearchDecoderBase, (PyObject *) __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoderBase) < (0)) __PYX_ERR(0, 82, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoderBase) < (0)) __PYX_ERR(0, 82, __pyx_L1_error)
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_t_1 = PyTuple_Pack(1, (PyObject *)__pyx_mstate_global->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoderBase); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_Pack(1, (PyObject *)__pyx_mstate_global->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoderBase); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder_spec, __pyx_t_1);
   __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder)) __PYX_ERR(0, 409, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder_spec, __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 409, __pyx_L1_error)
+  if (unlikely(!__pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder)) __PYX_ERR(0, 411, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder_spec, __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 411, __pyx_L1_error)
   #else
   __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder = &__pyx_type_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder;
   #endif
@@ -11896,7 +11905,7 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   __pyx_mstate_global->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder->tp_base = __pyx_mstate_global->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoderBase;
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 409, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 411, __pyx_L1_error)
   #endif
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount((PyObject*)__pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder);
@@ -11906,8 +11915,8 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder->tp_getattro = PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_BeamSearchDecoder, (PyObject *) __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 409, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 409, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_BeamSearchDecoder, (PyObject *) __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 411, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder) < (0)) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -12513,25 +12522,25 @@ __Pyx_RefNannySetupContext("PyInit__beam_search_decoder", 0);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_setstate_cython, __pyx_t_2) < (0)) __PYX_ERR(2, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "beam_search_decoder/_beam_search_decoder.pyx":443
+  /* "beam_search_decoder/_beam_search_decoder.pyx":445
  *         pass
  * 
  *     def decode(self, input_vector: np.ndarray) -> np.ndarray:             # <<<<<<<<<<<<<<
  *         """
  *         Decode the input input_vector using belief propagation decoding algorithm.
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 443, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 445, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_input_vector, __pyx_mstate_global->__pyx_kp_u_np_ndarray) < (0)) __PYX_ERR(0, 443, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_np_ndarray) < (0)) __PYX_ERR(0, 443, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDecoder_5decode, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_BeamSearchDecoder_decode, NULL, __pyx_mstate_global->__pyx_n_u_beam_search_decoder__beam_search, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 443, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_input_vector, __pyx_mstate_global->__pyx_kp_u_np_ndarray) < (0)) __PYX_ERR(0, 445, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_np_ndarray) < (0)) __PYX_ERR(0, 445, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_19beam_search_decoder_20_beam_search_decoder_17BeamSearchDecoder_5decode, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_BeamSearchDecoder_decode, NULL, __pyx_mstate_global->__pyx_n_u_beam_search_decoder__beam_search, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 445, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder, __pyx_mstate_global->__pyx_n_u_decode, __pyx_t_4) < (0)) __PYX_ERR(0, 443, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_19beam_search_decoder_20_beam_search_decoder_BeamSearchDecoder, __pyx_mstate_global->__pyx_n_u_decode, __pyx_t_4) < (0)) __PYX_ERR(0, 445, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "(tree fragment)":1
@@ -12634,25 +12643,25 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{1},{179},{132},{42},{110},{114},{30},{40},{19},{1},{8},{44},{80},{55},{7},{6},{2},{83},{58},{9},{85},{60},{80},{55},{50},{6},{10},{81},{56},{39},{34},{46},{51},{39},{14},{17},{21},{39},{41},{42},{35},{37},{24},{5},{4},{4},{8},{20},{5},{6},{18},{4},{40},{10},{9},{13},{17},{18},{24},{13},{4},{10},{6},{5},{13},{8},{3},{12},{7},{1},{13},{12},{5},{7},{13},{5},{15},{4},{4},{26},{16},{8},{10},{10},{8},{3},{7},{2},{11},{5},{4},{3},{6},{3},{3},{11},{12},{10},{17},{13},{6},{5},{13},{12},{10},{4},{12},{10},{12},{19},{5},{6},{8},{3},{8},{6},{5},{20},{5},{6},{8},{17},{5},{16},{9},{33},{217}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (1420 bytes) */
-const char* const cstring = "BZh91AY&SYO\332\244\033\000\000\274\377\377\355\377\3562|\377\377U\277%\377*\277\377\377\372@@@@@@@@\000@@@@\000@\000P\005i\230\265Z\004\330\001%2\031$\320\231\031\rS\314\221\230SSCG\251\275(h\310h\001\3524\003F\201\351\006\236\230\233T\331\252\014\210\000\244\365Oi'\241=5\000\364@\003j4\000\000\000\001\2044\332\206&\206\022$\002&\200 \211\2202i\224\321\200\000\3214h\311\200\0200\000Li1\303@4\000\032\003@h\000\000\006\2324\320\006@\000\003F\231\0068h\006\200\003@h\r\000\000\000\323F\232\000\310\000\000h\323 \322s\342#>\\\3324\"i!\261-\025\020\225\215H\021\002,Wy\031H\034l\200\343\005\225\253\220_\000$&\375\327D\212\2646.\241\003 \352\354\374\261\343V#\2661\223\260\203Y\252B}\321\344d\007\\v\265\301p\005\315\240T\244:\217\341V\002\253\2677\310<\007J\210\025!\222F\266\206B\036\244\177\342\364\307\333%*\"\310\210\374g\237u}#$d]C\323\273\260\327A\030\337\220\215\272\024\256\264\257\231IS\006\332\326\227\0338\263\021Y\313\2469\244\277\222\274\242t\033\331\240\245\327p>\330tM\2225\214p\334l\210\341\032\304k/B\365F\244D\264\031\215\214\354\026h!R\262\362T\001\242\025\256-\341\212d\234{\360\274\337\017\271A\256\t\332\212\244\366:\325\334JT*\210\000\202\325\360\342\005\3612\343;d\010\241w`(4\330\307\315\006\373\366\332\006\323\367\374\246\247SC<\270e\343 \371\357\204\250\373\236\003\277\341\333\311\360\216F\304\210\376\020.\022\250ai\r,J\340\272\374Q~|`\314I+\302\266\266M\021\253>-\321\250\200\260\264\\\203A\340\203\2416n%\236-\271W'T\346\337s\n\252h\321;-\212A!g)\312r\240b\230\036oJ\320C\352\222\333\326\313\022\334\353AN\351,\374(\337\200\003\214\311\027\356\001\245\334}D\212\241w\263\351D\305\213\212\253\354\t\365\033)<ts\254\ri\272\031+\2004\301\266\3203\035\235\364\253\010\262\001n\352\322\364\216\333[\325\307\200\272\242\227\341\266\343\340\267\010U0\270\275i?R\373R\325\212u\315P\314\260\222}\331\227Ou#\034\3227\214\332\302\202b\3210\232]\022F\243^\003.8\tk\334\340I\231\343\244kR\222S\247o\233\203ha\274g]#q1OT\367\323yE\314\323}\227=\222\333\3122!\266Cm\267;.\262\rI~h2""\014,\357\210K3\270\233cC\257x\317`G!dr\254Z\302\331,\277J\022\235\032U'\3004N\263\304/\247\236\266i\r#5\276?`\242\275J\264\3336\344F\250\274JT4\\\322\353\263\234\220\245\"\025\257^\211o\003\242\325\204\262\024\"\007\266\303\214I\003K*\006\3107\210(\204\330UD#\n \330l\260\301\010LH\003\322ZQ;Gh\032\304\326\331\021>\035a\350\335X\301[\253Aw.\200\231\334E$F\342\223\014\223\024\010\302p\270\036\031\010$\314L\263p\276\354\2720cv\331Y@\212\244m\002\345\365\230\267\002i\266\232\230_w\236\270\030S\332\254\256\225\374~\304\271\313\3248OR\315\250'\020\202 !-\321\231\316\244\343\204\264\250\224\004\\\262\275l\205`\357\372ii\000\334D@\363\367s\244\362\362\231\214\321\001:f\370\244\344\326i\363w\224\003\300\031\334}\250X\227bH\312\350\014D!fg\246\233\357\324\350\272XZZ\220\3057\234o.IC\355\034\200\0311u\357b\004\327\211\256\367*k\225\331\234\014\202\210\206L\206\"T,\r\215\273HU5\300\355Ak\302D\304\316\261j\3560\252\223\340\266\204rd\303=\3131\026_\254\320\031iSp\233\257\017\343\312^G\216\345t\322\032blMi\013n{R%\304O|\220\254\2153\352\261\233\3400Q\201[_\2352y\004XV,)\010ba\r\322P\305\225y\251\021\022\005X4\201\330C\336\346\225rTr]{2\372\272\0256\240\231A`\013/\373\352\300\321\027\221y\0303-\004e2\336e,1E\231*W\201`\212\033\344\033\013\204\304\220\313\371z,\017/\321\347\2255\355\324J\016\\ACs\030D\010\212\354\332h\205\\\336'\266\331RNV\276Jb\312t\214\000\335\211$b\005\241\250\2479\033\010b\340\225V\263B\331\264p\"\226H\232\260\210\225\260w\246N\371\225\014\202\320\031\007e,\206~\001o\214@@[\036G.2\326t\331\033WK]\235@K\372GV\310]\010\t&\354\227\034t\010\315\362\344\253*IZH\351\275\324\022\207([\366f\227nd\034s\224\264\330\224c\275\322\027\026*X\016\243\211\253\007\037\344}\017\353\367\374\034\200\313\334P\376\360\014\221b\377w\362\362\246Y\016\346\016Xs\322\360\241\373\231(\313'\036-7R\216}\2755n\273\305?\262\344\315\016\247C\230S\232\236\034j\246\365\3130nV\214\217''_\262v\241\275\306%\224J\220\3374\244\315?qw$S\205\t\004\375\252A\260";
-    PyObject *data = __Pyx_DecompressString(cstring, 1420, 2);
+    const struct { const unsigned int length: 8; } index[] = {{1},{179},{132},{42},{110},{114},{30},{40},{19},{1},{8},{44},{80},{55},{7},{6},{2},{83},{58},{9},{85},{60},{80},{55},{50},{6},{10},{81},{56},{39},{34},{46},{67},{39},{14},{17},{21},{39},{41},{42},{35},{37},{24},{5},{4},{4},{8},{20},{5},{6},{18},{4},{40},{10},{9},{13},{17},{18},{24},{13},{4},{10},{6},{5},{13},{8},{3},{12},{7},{1},{13},{12},{5},{7},{13},{5},{15},{4},{4},{26},{16},{8},{10},{10},{8},{3},{7},{2},{11},{5},{4},{3},{6},{3},{3},{11},{12},{10},{17},{13},{6},{5},{13},{12},{10},{4},{12},{10},{12},{19},{5},{6},{8},{3},{8},{6},{5},{20},{5},{6},{8},{17},{5},{16},{9},{33},{217}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (1432 bytes) */
+const char* const cstring = "BZh91AY&SYT(\007o\000\000\277\377\377\355\377\3562|\377\377U\277%\377*\277\377\377\372@@@@@@@@\000@@@@\000@\000P\005dB\365sM\262\025\215\201\267!\242L\214\211\241O'\246\223(\3755\020\007\251\264#\3122\032\001\352d\0324b\036I\232\237\2405Oi\252\t!\001\004\320\324\247\262\246OP\033S@\000\000\320\000\000\0004h\003\322\000bD'\246\211<S\3054\233OR4\311\352h\000\000\310\000\000\000\000\000\320\007\r\000\320\000h\r\001\240\000\000\032h\323@\031\000\000\r\032d\030H\2412\020\324\312fSh\215\000\017P\000\000\000\000\000\000\006@hE\246\371\014\3312\350\320g1\007\005\251VdI\032\214\031\203H\244\371\250\3521\302\001\215\022\222\205\030\254\0007\035oJ\226B\202BV\247\210\014czN{\267o5\342R\034\305x\213\021\214)B\033\260\324G\352.\271\326\353\212`\247,Glk\347S\272\312\246O\321\205.P'|Xvv!\033\031\014:\033$t\026\235\377HQ4U\016\377\304\261\336\277\021\2100,\235\263\226\3039\210\266\353\210\323\"t\315+bN'sJRv\031\215X\273\266\233Sv#\213fJV\205\303/.Z\226gy\353t\226=\324\004rZJ\206\n\366\026AP\213\004,'BuD\2033\200*&\2634J\224\202#S\346\260\033 \213\"\r\310v\017l+\217q\365\362q\2409\361\270\334+\271N\3356\034\350\017\n\200S\326\331\0140\236U1[d\0045\235\330\010\r\2700g\251\350\243\003`\265\250\257:I-\207\303\316\325wh\200\350[\010\224~\010\315y{\356\235T@)\021\004[@Z\305\003\232H\222\206\313\247\272\234\366\247mj\307;_S-\362\274\213e\037T\272\271\0254R0RB\324\007Q&b#z\312bNv\271\247\026\363X\246\244\214\t\321g(\204\013\030\224a|HuU\341\371;\304S&\277G\337\310_wg\320\263\257\355(\374\334\230\004\325\251\0310\003K3\322H\232\026\275\354\250\220\254\254S_@\226\223eR\263Gb\240\021\246\266D\276\301+\215\322\203\271:\333*7\212\3003i=e\302{\237Np\3323\261Z\267\335\014`\314\304\031D\r\253\031+k\025D\321\t0\0242\023\300\222\266^1\025\\\217~X7\214m`\230\230Y\246\t%\306\021\221\262\341\207%\3026ng\022B0\321\010\320\\K\344\330\277=\"\020\026\0040$V\036\013\350}\222X$7\242\226\272~s\252\271\247\014\222\014\222I>c\206\004\nI\333 D\t\315\020\235\211\276fM\261\241\317\\\277\204!\220V\231'\nPXco\356""\2422\251\2452Z\001\232jJ\356\273\034iVHd\214V\367\377Bj\324(\311\231\215\270\017\223\331\342&0\306r?Q\r\022C2E\357\313\2676\230?\233jU\206\032\000\362\035\007jY+\313\003X9H)\023SbDp\322\032\263\0278\204N\202\002\234-bwGz\r\004\321\254p\330a\031\363a#\247\226\347\304\335\311\210\226\031\263\244[7J\276\336\006#B\\\323\027r\206/\034\361\247d\266\3548\334\276\355\261T\342(\221\264\013\026\331V\327\013\2714\314\311\224\202\373\274\325\251\202\226\325Ud\255\342\365#\201j\006\262\311b\311\311;\240w\007KG\304\340\241\237X\316\202N\017b\252\324\252\025C\270\355gX\001\231\335\230(\367\243#\347\343!\010\220\300>H\253INF%_\374,\002\200\0028\202\314\352\361\324\204ad\005\335\320\2611\317=\366\351q\262WY\326n\302\223b\373\313\020\240\367\2060\006HZ\225\320\200\232\335\335]d\313\243[/@d\n\221\006H\203\021\032\212\003cn\221\024\313\240:T+\254H\220\231\263)<E\212i<\365\204!\215\222\013\330\225\341\024_\311 -\3013\020\233\236\177\007\034x\2347\032\312$\"\201H\024icTj$:\320U\216 \314E1\322A\013\030\010\023`)[pLK\000z\212\245E\002\030L\016\3158v\026\024\345\233\273\300*9\233\223\346)I\311<\333#\277\236\2749^u\311oc\004\306\200\367\377\251\224\022-Dj\320p\336#do\360\261\321Y\237\004\235?KB\314\271P\264SX\027e\177\353[AEN\257\010\236\315\271\020\347i\310\t\331\2440;\210zi\264\315\n\230\265\345\266\270N\030\212\333\005!a)\275\300f\251\t\027qfdO\200\372\016\302\325*-\206ex\3431\030\351t\262\204Y>\207\255\202[c\"*\370\212\344\356\205\206\313L\330v\212\024\026s\264\307\241\033\214\264F\025\225\255\325\360#\327\206\235\020\264P\007\024\246&\330d\004E]q\225\322fy\304\3627\020\201`\346Nc\237U\004\354<0\202\203MQ\246D\206M`\023\022\027\326\016\233\017U\274=\003\230\277\235=C\020(\357 \177x\204\220\337\377y\262c<\221\025\337\016:\331\247|KF\274\222\344\213\r\371\254\234\272v\246z\313\274\267/W\215\261\335\253\234O\226~L\r\376\313\222\2738\364i\221\322\370\3605\306fJ\261\007N\316\221\222\275\316B\237\370\273\222)\302\204\202\241@;x";
+    PyObject *data = __Pyx_DecompressString(cstring, 1432, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (1240 bytes) */
-const char* const cstring = "x\332\255V\317o\033E\024n\204\005\2465\264\021\345\000\022\322\004\220\222\246\351\202\333RU\025\242\nM\220\220\242\220@@BQ5\232\335}\216\207\354\316lff\023o\021\022G\037\367\270G\037}\314\261\177\002G\037}\354\237\300\237\300\233\331ul\307\306\255 V\262\332\235}?\276\371\346\275\357\255\267+\r\020\323f\206<\313L[\n\3025\t!\342>(f \312\2106\212\007\006\2245\022do{\357\336\303\307\017\t\023!Q\360\033\004F\023\235\372A\304\264\006Md\213\370)\217\014\027\304d\th\217|\337\"\231L\211\000\010\211\221$A\273I\007\323\006A4\030{CV\231\020\3220\303\245\240\350\316\305\321*\t\271\302$\374\024\254\367w,\322\340\355E\3004\020\235@\300[\231\363\004\245\244\"\001\"\024\020y\345#\255\036\237\220\211_\304\265\261([\221d\306\341\215@\034\2316\201\223\224E6\207\r\347G28\036\275A\033\273\026\310\020\310\357\032\242\226'\376\360\016.'%\247\010\023\037\343\024\023\264\031\342\255\334\255%\027IjH\314\220\312\216%\030C\"\227\\\234\262\210\207\216)\217T\273*M\253\037#\"\361D\310\224b\031\301\340:\340I\346\351\204)\244A'U@\351\333s\330 \310\335\377\312\366\3372\376,\360\270\016w\220\327CG\352\363\215\211\020\317\313\267s\243\\\262;\026\362L`}(\026\203-\267\325\247,\014)f\000\037XL50\025\264i\010\366\034\324\027t\316\242\227d\035\267|\306C$\276\334\3338 2Qq\340!M\370\344\216\312\037\025\022\307\002e\032\tH\244\346\256\340\2700\336\202x#\367K\036\004;\n\253V3?\002\020\366z\024p\201\357YD9\372\351\253\001\2668\344\"l\\\227\260B\347J\023PT\311\024\373\371jp\275&\350\"d1\353\224^W\304\321\202x\213`\010\211\n\330bid\010\245\n\3024\000JI\230:\t\022R\334\303\352=E\356\361\255;YJ\313N\030\227\263Hct\324\030\341\212v\262(\340\302\255\24416\036\r\244\002/Fo^6v\213\361\250\324c\036'R\231I\263\024\273\263=c\261\352\224\273\\\261j\370-\366\305O\256\373\266\312\346C}\0248*R+\202\236\266\221hl\025s\204\356K\262\026E\212\3524\276cu\245I\326@\030%\223\354N\211t\216\3134!\302\355\352k;\216\304\221\226\251\n\340\233\031\024\263\013\250rs\027\275\213\243\r\334\334\243\364\337\314p:i\034J\2573L\223\320\031\225""\343\200&J\372z\306\362\r\262\276QF\257\224\274\255\203_\367\266\255\364\356J\001?$vp\242$\320\275\254\203\377[8\266\351.t\314\217\320r2\314\264\325~\2463\021p\351!\3372\305A\r\232u\270\236'\247\3634v\254\207>\026~\200\315e\246v\214-a';=\002\203J\020\333GLA9\016t\305\002\360Yp\214\205r\n\312P#\251\317\005S\031-\007\203\013\206\202/^\200\222A\022\304\201V\264\034\025e\362\320\302\237\032\355\224\266R\021P\233\315]J\326h\033\"\024 \315\2474\322\265\r-\2474V\322\203\373\\R\003\332P\256\351\005\027\026\263\276$a\307\220\351(L\002\373\357U\241=7\321F\211p\322\323\311\360\024a\343\216\351X\177\250\255\3544Bl\224\n\354[\274\212\027\325VE2\321\335\256\023\3610\261\300\r\376aL$\"\221\t\2458\334h\265?\373\251RF\031\353\323La],@\307\336\232T\t\007z\n\371\344`\036w\240\375\310qUXa\305\273J\020'j\223\316\251S\335f\370\321WF\253\246<6<-y\256>\351R$\377\361\274fAML\301]\364\031S\302v\271\245g\212Y\273\240\007\265\365\301\372\316_\233\303zc\320\370\244\330\377siX\273\336\275\233\357\017\256-\347\313\303\332\307\305\335\336~\217\rk\357u\017\213\245\002W\352]4\271\321m\016j\237\365\236\236\257\374\275~\355\335U4\250\337\312\033\305\346\253\372\347\275g\275\223\376\322\253z\243\273\235\177\230\263\374d\330\270\225_/V\212\257z\215\376f\177\177\330\270\3315\371\223b\277\010\007\237>:GO\014fmj\371No\311\335\014no\3647\253\273\265\376h\355n\2779s\347\354>\310\357\347\277\024\315b\253w\243\377\350|\031\267\322\335\312\337\311O\212\232\005\364~\327\317\337F\034\246xP\264zv\243\0250\203\210\336\3525{\333\375\333\375\203\363\217^\256\274l\016\3537\273'\377\000\347\307y\226";
-    PyObject *data = __Pyx_DecompressString(cstring, 1240, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (1252 bytes) */
+const char* const cstring = "x\332\255V\317o\033E\024n\204\005\2415\264\021\345\000\022\322\004\220\222&\351\202\323RU\025\242\nM\220\220\242\220@@BQ5\232\335}\216\007\357\316lff\023o\021\022G\037\367\270G\037}\314\261\177\002G\037}\354\237\300\237\300\233\331ul'\306\255 V\262\332\235}?\276\371\346\275\357\255\267'\r\020\323b\206<\313LK\n\3025\t!\342>(f \312\2106\212\007\006\2245\022d\177g\377\376\303\307\017\t\023!Q\360\033\004F\023\235\372A\304\264\006Md\223\370)\217\014\027\304d\th\217|\337$\231L\211\000\010\211\221$A\273I\007\323\002A4\030{CV\230\020\3220\303\245\240\350\316\305\361\n\t\271\302$\374\024\254\367w,\322\340\355G\3004\020\235@\300\233\231\363\004\245\244\"\001\"\024\020y\345#\255\036\237\220\211_\304\265\261(\233\221d\306\341\215@\034\233\026\201\223\224E6\207\r\347G2h\217\336\240\215]\013d\010\344w\rQ\323\023\177x\207\227\223\222S\204\211\217q\212\tZ\014\361V\356\326\222\213$5$fHe\307\022\214!\221K.NY\304C\307\224G\252]\225\246\325\217\021\221x\"dJ\261\214`p\035\360$\363t\302\024\322\240\223*\240\364\3559l\020\344\356\177e\373o\031\177\026x\\G\273\310\353\221#\365\371\306D\210\347\345\333\231Q.\331\265\205<\023X\037\212\305`\313m\345)\013C\212\031\300\007\026S\rL\005-\032\202=\007\365\005\235\261\350%Y\307-\237\361\020\211/\3676\016\210LT\034xH\023>\271\243\362G\205\304\261@\231F\002\022\251\271+8.\2147'\336\310\375\222\007\301\216\302\252\325\314\217\000\204\275\036\007\\\340{\026Q\216~\372z\200\315\0179\017\033\327%\254\320\271\322\004\024U2\305~\276\036\\\257\t:\017Y\314:\245\3275q4'\336<\030B\242\0026Y\032\031B\251\2020\r\200R\022\246N\202\204\024\367\261zO\221{|\353N\226\322\262\023\306\345,\322\030\0355F\270\246\235\314\0138w+i\214\215G\003\251\300\213\321\233\227\215\335d<*\365\230\307\211Tf\322,\305\356l]\261Xq\312]\256X5\374\026\373\342'\327}\333e\363\241>\n\034\025\251\025AO\333H4\266\2129B\367%Y\215\"Eu\032\337\333 \r\262\n\302(\231d\370\200*\263IV\317\200\265A\033\332\276W\"\237\021b\232 \341v\371\265\035O\342X\313T\005\360\315\025TW\027P\365f.z\027G\035\2709H\351""\277\231\341\264\3228\244^g\230&\2413*\307\003M\224\364\365\025\3137\310\372F\031\275R\002\267\017\177\335\337\261R\274'\005\374\220\330A\212\022A\367\263\016\376o\343\030\247{\3201?B\323\3112\323v\0260\235\211\200K\017\371\226)\016n\320\254\303\365,y\235\245\271c}\364\261\021\002l63\265cl\021;\351\3511\030T\206\330>b\n\312q\300+\026\200\317\2026\026\316)(C\215\244>\027Le\264\034\024.\030\016\000\361\002\224\014\222 \016\264\242\345\350(\223\207\026\376\324\250\247\264\231\212\200\332l\356R\262F[\020\241 i>\245\231\256\215h9\265\261\222\036lrI\215\255@\256\351\005\027\026\263\276$im\310t\024&\201\375\367\252\320\236\233p\243D8\371\351dx\212\260q\307t\254G\324Vv\032!6J\005\3661^\305\213j\253\"\231\350v\327\231x\230X\340\006\3770&\022\221\310\204R\034v\264\332\237\375t)\243\214\365\352Ja],@\307\336\232T\t\007z\n\371\344\240\036w\240\375\350qUXa\305\273J 'j\223\316\250S\335b\370\021XF\253\246>\n\000-y\256>\361R$\377\361\254fA\215L\301]\364\031S\302v\271\245g\212Y\273\240\007\265\265\301\332\356_[\303\305\372\240\376Iq\360\347\302\260v\263\273\236\037\014n,\345K\303\332\307\305z\357\240\307\206\265\367\272G\305B\201+\213]4\271\325m\014j\237\365\236\236/\377\275v\343\335\0254X\274\223\327\213\255W\213\237\367\236\365N\372\013\257\026\353\335\235\374\303\234\345'\303\372\235\374f\261\\|\325\253\367\267\372\007\303\372\355\256\311\237\024\007E8\370\364\3219zb0kS\313w{\013\356fpw\243\277U\335\255\366Gk\353\375\306\225;g\367A\276\231\377R4\212\355\336\255\376\243\363%\334Jw;\177'?)j\026\320\373]?\177\033q\230\342A\321\354\331\215V\300\014\"z\253\327\350\355\364\357\366\017\317?z\271\374\2621\\\274\335=\371\007\263R~o";
+    PyObject *data = __Pyx_DecompressString(cstring, 1252, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (3015 bytes) */
-const char* const bytes = ".Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.Please specify the error channel. error_channel:            list of floats of length equal to the block length of the code {self.n}.The error channel vector must have length The input matrix is of an invalid type. Please input        a np.ndarray or scipy.sparse.spmatrix object, not The input matrix is of an invalid type. Please input            a np.ndarray or scipy.sparse.spmatrix object, not Union[List[float], np.ndarray]Union[scipy.sparse.spmatrix, np.ndarray]Unknown parameter '?add_notebeam_search_decoder/_beam_search_decoder.pyxbeam_width input parameter is invalid. This must be specified as a positive int.beam_width input parameter must be a positive int. Not disableenablegcinitial_iters input parameter is invalid. This must be specified as a positive int.initial_iters input parameter must be a positive int. Not isenablediters_per_round input parameter is invalid. This must be specified as a positive int.iters_per_round input parameter must be a positive int. Not max_rounds input parameter is invalid. This must be specified as a positive int.max_rounds input parameter must be a positive int. Not no default __reduce__ due to non-trivial __cinit__, not np.ndarraynum_results input parameter is invalid. This must be specified as a positive int.num_results input parameter must be a positive int. Not numpy._core.multiarray failed to importnumpy._core.umath failed to import' passed to the BeamSearchDecoder constructor.score_mode must be 0 (llr_sum) or 1 (entropy). Not score_mode must be specified as an int.<stringsource>BeamSearchDecoderBeamSearchDecoderBaseBeamSearchDecoderBase.__reduce_cython__BeamSearchDecoderBase.__setstate_cython__BeamSearchDecoderBase.update_channel_probsBeamSearchDecoder.__reduce_cython__BeamSearchDecoder.__setstate_cython__BeamSearchDecoder.decodeDTYPEListNoneOptio""nal__Pyx_PyDict_NextRefUnionastypeasyncio.coroutinesaxisbeam_search_decoder._beam_search_decoderbeam_widthbit_countchannel_probs__class_getitem__cline_in_tracebackconvert_to_binary_sparsecount_nonzerocpcmcsr_matrixdecodedtypeerror_channel__func__get__getstate__helpersiinitial_itersinput_vectorint32io_test_is_coroutineitemsiters_per_roundkeysldpcldpc.helpers.scipy_helperslen_input_vector__main__max_rounds__module____name__nnznonzeronpnum_resultsnumpyonesoutoutputpcmpop__pyx_state__qualname____reduce____reduce_cython____reduce_ex__returnscipyscipy_helpersscipy.sparsescore_modeself__set_name__setdefault__setstate____setstate_cython__shapesparsespmatrixsum__test__typinguint8update_channel_probsvaluevalueswarningszero_input_vectorzeros\320\004*\320*L\310A\330\010\014\320\014\035\230Q\200\001\330\004\n\210+\220Q\320\000\021\220\021\330\004\032\230+\240Q\240a\330\004\r\210[\230\001\230\021\330\004\010\210\001\330\004\013\2101\320\004#\240?\260!\360*\000\t'\240a\330\010\020\220\014\230A\340\010$\240C\240q\250\001\340\010\014\210E\220\025\220a\220q\330\014\020\220\n\230!\2305\240\014\250A\250Q\330\014\017\210t\220:\230Q\230d\320\"6\260a\330\010\013\2101\330\014\020\220\004\220L\240\001\330\014\020\220\004\320\024,\250A\330\014\020\220\004\320\024(\250\001\330\014\020\220\004\320\024+\2501\330\014\020\220\004\320\024+\2501\330\014\020\220\004\320\024,\250A\330\014\023\2202\220V\2301\230D\240\013\2506\260\021\330\010\014\210D\220\007\220q\230\004\230A\340\010\016\210b\220\006\220a\220t\2303\230f\240A\330\010\014\210E\220\025\220a\220t\2305\240\003\2401\240E\250\024\250T\260\031\270!\2701\330\010\017\210q";
+    #else /* compression: none (3031 bytes) */
+const char* const bytes = ".Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.Please specify the error channel. error_channel:            list of floats of length equal to the block length of the code {self.n}.The error channel vector must have length The input matrix is of an invalid type. Please input        a np.ndarray or scipy.sparse.spmatrix object, not The input matrix is of an invalid type. Please input            a np.ndarray or scipy.sparse.spmatrix object, not Union[List[float], np.ndarray]Union[scipy.sparse.spmatrix, np.ndarray]Unknown parameter '?add_notebeam_search_decoder/_beam_search_decoder.pyxbeam_width input parameter is invalid. This must be specified as a positive int.beam_width input parameter must be a positive int. Not disableenablegcinitial_iters input parameter is invalid. This must be specified as a positive int.initial_iters input parameter must be a positive int. Not isenablediters_per_round input parameter is invalid. This must be specified as a positive int.iters_per_round input parameter must be a positive int. Not max_rounds input parameter is invalid. This must be specified as a positive int.max_rounds input parameter must be a positive int. Not no default __reduce__ due to non-trivial __cinit__, not np.ndarraynum_results input parameter is invalid. This must be specified as a positive int.num_results input parameter must be a positive int. Not numpy._core.multiarray failed to importnumpy._core.umath failed to import' passed to the BeamSearchDecoder constructor.score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). Not score_mode must be specified as an int.<stringsource>BeamSearchDecoderBeamSearchDecoderBaseBeamSearchDecoderBase.__reduce_cython__BeamSearchDecoderBase.__setstate_cython__BeamSearchDecoderBase.update_channel_probsBeamSearchDecoder.__reduce_cython__BeamSearchDecoder.__setstate_cython__BeamSearchDecoder.decodeDT""YPEListNoneOptional__Pyx_PyDict_NextRefUnionastypeasyncio.coroutinesaxisbeam_search_decoder._beam_search_decoderbeam_widthbit_countchannel_probs__class_getitem__cline_in_tracebackconvert_to_binary_sparsecount_nonzerocpcmcsr_matrixdecodedtypeerror_channel__func__get__getstate__helpersiinitial_itersinput_vectorint32io_test_is_coroutineitemsiters_per_roundkeysldpcldpc.helpers.scipy_helperslen_input_vector__main__max_rounds__module____name__nnznonzeronpnum_resultsnumpyonesoutoutputpcmpop__pyx_state__qualname____reduce____reduce_cython____reduce_ex__returnscipyscipy_helpersscipy.sparsescore_modeself__set_name__setdefault__setstate____setstate_cython__shapesparsespmatrixsum__test__typinguint8update_channel_probsvaluevalueswarningszero_input_vectorzeros\320\004*\320*L\310A\330\010\014\320\014\035\230Q\200\001\330\004\n\210+\220Q\320\000\021\220\021\330\004\032\230+\240Q\240a\330\004\r\210[\230\001\230\021\330\004\010\210\001\330\004\013\2101\320\004#\240?\260!\360*\000\t'\240a\330\010\020\220\014\230A\340\010$\240C\240q\250\001\340\010\014\210E\220\025\220a\220q\330\014\020\220\n\230!\2305\240\014\250A\250Q\330\014\017\210t\220:\230Q\230d\320\"6\260a\330\010\013\2101\330\014\020\220\004\220L\240\001\330\014\020\220\004\320\024,\250A\330\014\020\220\004\320\024(\250\001\330\014\020\220\004\320\024+\2501\330\014\020\220\004\320\024+\2501\330\014\020\220\004\320\024,\250A\330\014\023\2202\220V\2301\230D\240\013\2506\260\021\330\010\014\210D\220\007\220q\230\004\230A\340\010\016\210b\220\006\220a\220t\2303\230f\240A\330\010\014\210E\220\025\220a\220t\2305\240\003\2401\240E\250\024\250T\260\031\270!\2701\330\010\017\210q";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
@@ -12707,8 +12716,8 @@ const char* const bytes = ".Note that Cython is deliberately stricter than PEP-4
   }
   {
     PyObject **numbertab = __pyx_mstate->__pyx_number_tab + 0;
-    int8_t const cint_constants_1[] = {0,1,8,10,20,30};
-    for (int i = 0; i < 6; i++) {
+    int8_t const cint_constants_1[] = {0,1,2,8,10,20,30};
+    for (int i = 0; i < 7; i++) {
       numbertab[i] = PyLong_FromLong(cint_constants_1[i - 0]);
       if (unlikely(!numbertab[i])) __PYX_ERR(0, 1, __pyx_L1_error)
     }
@@ -12716,7 +12725,7 @@ const char* const bytes = ".Note that Cython is deliberately stricter than PEP-4
   #if CYTHON_IMMORTAL_CONSTANTS
   {
     PyObject **table = __pyx_mstate->__pyx_number_tab;
-    for (Py_ssize_t i=0; i<6; ++i) {
+    for (Py_ssize_t i=0; i<7; ++i) {
       #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
       #if PY_VERSION_HEX < 0x030E0000
       if (_Py_IsOwnedByCurrentThread(table[i]) && Py_REFCNT(table[i]) == 1)
@@ -12780,7 +12789,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_mstate->__pyx_kp_b_iso88591_Q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 443};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 445};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_input_vector, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_zero_input_vector, __pyx_mstate->__pyx_n_u_DTYPE, __pyx_mstate->__pyx_n_u_len_input_vector, __pyx_mstate->__pyx_n_u_out};
     __pyx_mstate_global->__pyx_codeobj_tab[4] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_beam_search_decoder__beam_search_2, __pyx_mstate->__pyx_n_u_decode, __pyx_mstate->__pyx_kp_b_iso88591_a_A_Cq_E_aq_5_AQ_t_Qd_6a_1_L_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[4])) goto bad;
   }
