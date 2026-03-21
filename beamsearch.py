@@ -51,15 +51,17 @@ class BeamSearch:
                 score_mode_value = 1
             elif score_mode == "weakest_k":
                 score_mode_value = 2
+            elif score_mode == "hybrid":
+                score_mode_value = 3
             else:
                 raise ValueError(
-                    "score_mode must be 'llr_sum', 'entropy', or 'weakest_k'. "
+                    "score_mode must be 'llr_sum', 'entropy', 'weakest_k', or 'hybrid'. "
                     f"Not {score_mode!r}."
                 )
         elif isinstance(score_mode, int):
-            if score_mode not in (0, 1, 2):
+            if score_mode not in (0, 1, 2, 3):
                 raise ValueError(
-                    "score_mode int must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k). "
+                    "score_mode int must be 0 (llr_sum), 1 (entropy), 2 (weakest_k), or 3 (hybrid). "
                     f"Not {score_mode}."
                 )
             score_mode_value = score_mode

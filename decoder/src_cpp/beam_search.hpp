@@ -99,9 +99,9 @@ namespace ldpc {
                     throw std::runtime_error(
                             "Channel probabilities vector must have length equal to the number of bits");
                 }
-                if (this->score_mode < 0 || this->score_mode > 2) {
+                if (this->score_mode < 0 || this->score_mode > 3) {
                     throw std::runtime_error(
-                            "score_mode must be 0 (llr_sum), 1 (entropy), or 2 (weakest_k)");
+                            "score_mode must be 0 (llr_sum), 1 (entropy), 2 (weakest_k), or 3 (hybrid)");
                 }
             }
 
@@ -427,7 +427,7 @@ namespace ldpc {
                         // Compare different paths.
                         double score = 0;
                         std::vector<double> avg_abs_llrs;
-                        if (this->score_mode == 2) {
+                        if (this->score_mode == 2 || this->score_mode == 3) {
                             avg_abs_llrs.reserve(this->bit_count);
                         }
                         for (int i = 0; i < this->bit_count; i++) {
@@ -455,14 +455,25 @@ namespace ldpc {
                         }
                         if (this->score_mode == 0) {
                             score = score / static_cast<double>(this->iterations);
-                        } else if (this->score_mode == 2) {
+                        } else if (this->score_mode == 2 || this->score_mode == 3) {
                             int weakest_k = std::min(8, static_cast<int>(avg_abs_llrs.size()));
                             if (weakest_k > 0) {
-                                std::nth_element(avg_abs_llrs.begin(), avg_abs_llrs.begin() + weakest_k, avg_abs_llrs.end());
-                                for (int i = 0; i < weakest_k; i++) {
-                                    score += avg_abs_llrs[i];
+                                double all_mean = 0.0;
+                                for (double v: avg_abs_llrs) {
+                                    all_mean += v;
                                 }
-                                score = score / static_cast<double>(weakest_k);
+                                all_mean = all_mean / static_cast<double>(avg_abs_llrs.size());
+                                std::nth_element(avg_abs_llrs.begin(), avg_abs_llrs.begin() + weakest_k, avg_abs_llrs.end());
+                                double weak_mean = 0.0;
+                                for (int i = 0; i < weakest_k; i++) {
+                                    weak_mean += avg_abs_llrs[i];
+                                }
+                                weak_mean = weak_mean / static_cast<double>(weakest_k);
+                                if (this->score_mode == 2) {
+                                    score = weak_mean;
+                                } else {
+                                    score = all_mean * weak_mean;
+                                }
                             }
                         }
                         if (min_pq.size() >= this->beam_width && score < min_pq.top().first) {
