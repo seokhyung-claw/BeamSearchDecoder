@@ -29,6 +29,7 @@ class BeamSearch:
         num_results: int = 1,
         initial_iters: int = 30,
         iters_per_round: int = 20,
+        score_mode: str | int = "llr_sum",
         **bp_kwargs,
     ):
         """Class for decoding stim circuits using belief propagation (BP).
@@ -43,6 +44,27 @@ class BeamSearch:
         max_bp_iters : int, optional
             The maximum number of iterations of belief propagation to be used, by default {DEFAULT_MAX_BP_ITERS}
         """
+        if isinstance(score_mode, str):
+            if score_mode == "llr_sum":
+                score_mode_value = 0
+            elif score_mode == "entropy":
+                score_mode_value = 1
+            else:
+                raise ValueError(
+                    "score_mode must be 'llr_sum' or 'entropy'. "
+                    f"Not {score_mode!r}."
+                )
+        elif isinstance(score_mode, int):
+            if score_mode not in (0, 1):
+                raise ValueError(
+                    "score_mode int must be 0 (llr_sum) or 1 (entropy). "
+                    f"Not {score_mode}."
+                )
+            score_mode_value = score_mode
+        else:
+            raise TypeError("score_mode must be a string or int.")
+
+        self.score_mode = score_mode
         self._matrices = detector_error_model_to_check_matrices(model, allow_undecomposed_hyperedges=True)
         self.num_detectors = model.num_detectors
         self.num_errors = model.num_errors
@@ -54,6 +76,7 @@ class BeamSearch:
             num_results=num_results,
             initial_iters=initial_iters,
             iters_per_round=iters_per_round,
+            score_mode=score_mode_value,
             priors=self._matrices.priors,
             **bp_kwargs,
         )

@@ -54,6 +54,7 @@ namespace ldpc {
             int num_results;
             int initial_iters;
             int iters_per_round;
+            int score_mode;
             std::vector<uint8_t> decoding;
             std::vector<uint8_t> candidate_syndrome;
 
@@ -74,10 +75,11 @@ namespace ldpc {
                     int beam_width = 8,
                     int num_results = 1,
                     int initial_iters = 30,
-                    int iters_per_round = 20) :
+                    int iters_per_round = 20,
+                    int score_mode = 0) :
                     pcm(parity_check_matrix), channel_probabilities(std::move(channel_probabilities)),
                     check_count(pcm.m), bit_count(pcm.n), max_rounds(max_rounds), beam_width(beam_width), num_results(num_results),
-                    initial_iters(initial_iters), iters_per_round(iters_per_round),
+                    initial_iters(initial_iters), iters_per_round(iters_per_round), score_mode(score_mode),
                     iterations(0) //the parity check matrix is passed in by reference
             {
 
@@ -96,6 +98,10 @@ namespace ldpc {
                 if (this->channel_probabilities.size() != this->bit_count) {
                     throw std::runtime_error(
                             "Channel probabilities vector must have length equal to the number of bits");
+                }
+                if (this->score_mode < 0 || this->score_mode > 1) {
+                    throw std::runtime_error(
+                            "score_mode must be 0 (llr_sum) or 1 (entropy)");
                 }
             }
 
@@ -422,10 +428,26 @@ namespace ldpc {
                         double score = 0;
                         for (int i = 0; i < this->bit_count; i++) {
                             if (bit_masks[i] == -1) {
-                                score += std::abs(LLR_sums[i]);
+                                if (this->score_mode == 0) {
+                                    score += std::abs(LLR_sums[i]);
+                                } else {
+                                    double avg_abs_llr = std::abs(LLR_sums[i]) / static_cast<double>(this->iterations);
+                                    if (avg_abs_llr > 50.0) {
+                                        score += 1.0;
+                                    } else {
+                                        double p1 = 1.0 / (1.0 + std::exp(avg_abs_llr));
+                                        double p0 = 1.0 - p1;
+                                        double entropy = 0.0;
+                                        if (p0 > 0.0) entropy -= p0 * std::log(p0);
+                                        if (p1 > 0.0) entropy -= p1 * std::log(p1);
+                                        score += 1.0 - (entropy / std::log(2.0));
+                                    }
+                                }
                             }
                         }
-                        score = score / static_cast<double>(this->iterations);
+                        if (this->score_mode == 0) {
+                            score = score / static_cast<double>(this->iterations);
+                        }
                         if (min_pq.size() >= this->beam_width && score < min_pq.top().first) {
                             // restore the bit_masks vector and the syndrome vector
                             for (int i = 0; i <= round; i++) {

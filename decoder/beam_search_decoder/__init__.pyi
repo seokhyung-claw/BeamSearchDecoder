@@ -208,6 +208,12 @@ class BeamSearchDecoderBase:
             ValueError: If value is not a positive integer.
         """
 
+    @property
+    def score_mode(self) -> int: ...
+
+    @score_mode.setter
+    def score_mode(self, value: int) -> None: ...
+
 
 class BeamSearchDecoder(BeamSearchDecoderBase):
     """
@@ -228,12 +234,12 @@ class BeamSearchDecoder(BeamSearchDecoderBase):
     def __cinit__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],
                  error_channel: Optional[Union[np.ndarray,List[float]]] = None, max_rounds: Optional[int] = 10,
                  beam_width: Optional[int] = 8, num_results: Optional[int] = 1, initial_iters: Optional[int] = 30,
-                 iters_per_round: Optional[int] = 20, **kwargs): ...
+                 iters_per_round: Optional[int] = 20, score_mode: Optional[int] = 0, **kwargs): ...
 
     def __init__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix],
                  error_channel: Optional[Union[np.ndarray,List[float]]] = None, max_rounds: Optional[int] = 10,
                  beam_width: Optional[int] = 8, num_results: Optional[int] = 1, initial_iters: Optional[int] = 30,
-                 iters_per_round: Optional[int] = 20, **kwargs): ...
+                 iters_per_round: Optional[int] = 20, score_mode: Optional[int] = 0, **kwargs): ...
 
     def decode(self, input_vector: np.ndarray) -> np.ndarray:
         """
