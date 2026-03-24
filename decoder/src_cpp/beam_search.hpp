@@ -56,6 +56,7 @@ namespace ldpc {
             int iters_per_round;
             int score_mode;
             double nms_alpha;
+            int pivot_mode;  // 0=min-|LLR| (original), 1=check-frustration-weighted
             std::vector<uint8_t> decoding;
             std::vector<uint8_t> candidate_syndrome;
 
@@ -78,11 +79,12 @@ namespace ldpc {
                     int initial_iters = 30,
                     int iters_per_round = 20,
                     int score_mode = 0,
-                    double nms_alpha = 1.0) :
+                    double nms_alpha = 1.0,
+                    int pivot_mode = 0) :
                     pcm(parity_check_matrix), channel_probabilities(std::move(channel_probabilities)),
                     check_count(pcm.m), bit_count(pcm.n), max_rounds(max_rounds), beam_width(beam_width), num_results(num_results),
                     initial_iters(initial_iters), iters_per_round(iters_per_round), score_mode(score_mode),
-                    nms_alpha(nms_alpha),
+                    nms_alpha(nms_alpha), pivot_mode(pivot_mode),
                     iterations(0) //the parity check matrix is passed in by reference
             {
 
@@ -110,9 +112,62 @@ namespace ldpc {
                     throw std::runtime_error(
                             "nms_alpha must be in (0.0, 1.0]");
                 }
+                if (this->pivot_mode < 0 || this->pivot_mode > 1) {
+                    throw std::runtime_error(
+                            "pivot_mode must be 0 (min-|LLR|) or 1 (check-frustration-weighted)");
+                }
             }
 
             ~BeamSearchDecoder() = default;
+
+            // Select branching variable based on pivot_mode.
+            // residual_syndrome: XOR of target syndrome and candidate syndrome (1 = unsatisfied check).
+            // bit_masks: -1 means unfixed, else fixed value.
+            // LLR_sums: accumulated LLR values.
+            // Returns index of the chosen branching variable.
+            int select_pivot(const std::vector<uint8_t>& residual_syndrome,
+                             const std::vector<int>& bit_masks,
+                             const std::vector<double>& LLR_sums) {
+                if (this->pivot_mode == 0) {
+                    // Original: min |LLR| among eligible bits
+                    double min_score = std::numeric_limits<double>::max();
+                    int min_idx = 0;
+                    for (int i = 0; i < this->bit_count; i++) {
+                        if (bit_masks[i] != -1) continue;
+                        if (this->pcm.iterate_column(i).entry_count <= 2) continue;
+                        if (min_score > std::abs(LLR_sums[i])) {
+                            min_score = std::abs(LLR_sums[i]);
+                            min_idx = i;
+                        }
+                    }
+                    return min_idx;
+                } else {
+                    // Check-frustration-weighted: pick the bit touching the most
+                    // unsatisfied checks; tie-break by min |LLR|.
+                    int best_idx = 0;
+                    int best_unsat = -1;
+                    double best_llr = std::numeric_limits<double>::max();
+                    for (int i = 0; i < this->bit_count; i++) {
+                        if (bit_masks[i] != -1) continue;
+                        if (this->pcm.iterate_column(i).entry_count <= 2) continue;
+                        // Count unsatisfied checks this bit participates in
+                        int unsat_count = 0;
+                        for (auto &e : this->pcm.iterate_column(i)) {
+                            if (residual_syndrome[e.row_index] != 0) {
+                                unsat_count++;
+                            }
+                        }
+                        double abs_llr = std::abs(LLR_sums[i]);
+                        if (unsat_count > best_unsat ||
+                            (unsat_count == best_unsat && abs_llr < best_llr)) {
+                            best_idx = i;
+                            best_unsat = unsat_count;
+                            best_llr = abs_llr;
+                        }
+                    }
+                    return best_idx;
+                }
+            }
 
             void initialise_log_domain_bp() {
                 // initialise BP
@@ -257,16 +312,14 @@ namespace ldpc {
                 }
 
                 //Initialize for subsequent rounds
-                double min_score = std::abs(LLR_sums[0]);
-                int min_idx = 0;
-                for (int i = 0; i < this->bit_count; i++) {
-                    // skip qubits whose Tanner graph degree is <=2
-                    if (this->pcm.iterate_column(i).entry_count <= 2) continue;
-                    if (min_score > std::abs(LLR_sums[i])) {
-                        min_score = std::abs(LLR_sums[i]);
-                        min_idx = i;
-                    }
+                // Compute residual syndrome for pivot selection
+                std::vector<uint8_t> residual_syndrome(this->check_count);
+                for (int i = 0; i < this->check_count; i++) {
+                    residual_syndrome[i] = (this->candidate_syndrome[i] != syndrome[i]) ? 1 : 0;
                 }
+                // bit_masks not yet used; create all-unfixed mask
+                std::vector<int> init_bit_masks(this->bit_count, -1);
+                int min_idx = select_pivot(residual_syndrome, init_bit_masks, LLR_sums);
                 fixed_indices[0][0] = min_idx;
                 if (this->converge) {
                     converged_value[0] = cur_decoding[min_idx];
@@ -499,16 +552,13 @@ namespace ldpc {
                             fixed_indices[next_start + store_idx][i] = fixed_indices[start + list_ele][i];
                             fixed_values[next_start + store_idx][i] = fixed_values[start + list_ele][i];
                         }
-                        min_score = std::numeric_limits<double>::max();
-                        for (int i = 0; i < this->bit_count; i++) {
-                            if (bit_masks[i] != -1) continue;
-                            // skip qubits whose Tanner graph degree is <=2
-                            if (this->pcm.iterate_column(i).entry_count <= 2) continue;
-                            if (min_score > std::abs(LLR_sums[i])) {
-                                min_score = std::abs(LLR_sums[i]);
-                                min_idx = i;
-                            }
+                        // Compute residual syndrome for pivot selection
+                        // Note: syndrome here is already modified by fixed bits
+                        std::vector<uint8_t> beam_residual(this->check_count);
+                        for (int ci = 0; ci < this->check_count; ci++) {
+                            beam_residual[ci] = (this->candidate_syndrome[ci] != syndrome[ci]) ? 1 : 0;
                         }
+                        min_idx = select_pivot(beam_residual, bit_masks, LLR_sums);
                         fixed_indices[next_start + store_idx][round + 1] = min_idx;
                         if (this->converge) {
                             converged_value[next_start + store_idx] = cur_decoding[min_idx];
