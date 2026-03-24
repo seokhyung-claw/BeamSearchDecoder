@@ -55,6 +55,7 @@ namespace ldpc {
             int initial_iters;
             int iters_per_round;
             int score_mode;
+            double nms_alpha;
             std::vector<uint8_t> decoding;
             std::vector<uint8_t> candidate_syndrome;
 
@@ -76,10 +77,12 @@ namespace ldpc {
                     int num_results = 1,
                     int initial_iters = 30,
                     int iters_per_round = 20,
-                    int score_mode = 0) :
+                    int score_mode = 0,
+                    double nms_alpha = 1.0) :
                     pcm(parity_check_matrix), channel_probabilities(std::move(channel_probabilities)),
                     check_count(pcm.m), bit_count(pcm.n), max_rounds(max_rounds), beam_width(beam_width), num_results(num_results),
                     initial_iters(initial_iters), iters_per_round(iters_per_round), score_mode(score_mode),
+                    nms_alpha(nms_alpha),
                     iterations(0) //the parity check matrix is passed in by reference
             {
 
@@ -102,6 +105,10 @@ namespace ldpc {
                 if (this->score_mode < 0 || this->score_mode > 3) {
                     throw std::runtime_error(
                             "score_mode must be 0 (llr_sum), 1 (entropy), 2 (weakest_k), or 3 (hybrid)");
+                }
+                if (this->nms_alpha <= 0.0 || this->nms_alpha > 1.0) {
+                    throw std::runtime_error(
+                            "nms_alpha must be in (0.0, 1.0]");
                 }
             }
 
@@ -184,7 +191,7 @@ namespace ldpc {
 
                             int message_sign = (sgn % 2 == 0) ? 1.0 : -1.0;
 
-                            e.check_to_bit_msg *= message_sign;
+                            e.check_to_bit_msg *= message_sign * this->nms_alpha;
 
                             double abs_bit_to_check_msg = std::abs(e.bit_to_check_msg);
                             if (abs_bit_to_check_msg < temp) {
@@ -349,7 +356,7 @@ namespace ldpc {
 
                                     int message_sign = (sgn % 2 == 0) ? 1.0 : -1.0;
 
-                                    e.check_to_bit_msg *= message_sign;
+                                    e.check_to_bit_msg *= message_sign * this->nms_alpha;
 
                                     double abs_bit_to_check_msg = std::abs(e.bit_to_check_msg);
                                     if (abs_bit_to_check_msg < temp) {

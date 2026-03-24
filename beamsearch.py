@@ -30,6 +30,7 @@ class BeamSearch:
         initial_iters: int = 30,
         iters_per_round: int = 20,
         score_mode: str | int = "llr_sum",
+        nms_alpha: float = 1.0,
         **bp_kwargs,
     ):
         """Class for decoding stim circuits using belief propagation (BP).
@@ -81,6 +82,7 @@ class BeamSearch:
             initial_iters=initial_iters,
             iters_per_round=iters_per_round,
             score_mode=score_mode_value,
+            nms_alpha=nms_alpha,
             priors=self._matrices.priors,
             **bp_kwargs,
         )
