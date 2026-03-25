@@ -245,6 +245,22 @@ cdef class BeamSearchDecoderBase:
         return self.bpd.exhausted_max_rounds
 
     @property
+    def pivot_decisions_total(self) -> int:
+        return self.bpd.pivot_decisions_total
+
+    @property
+    def pivot_frustration_activations(self) -> int:
+        return self.bpd.pivot_frustration_activations
+
+    @property
+    def first_branch_unsat_frac(self) -> float:
+        return self.bpd.first_branch_unsat_frac
+
+    @property
+    def pivot_chosen_degree(self) -> int:
+        return self.bpd.pivot_chosen_degree
+
+    @property
     def check_count(self) -> int:
         """
         Returns the number of rows of the parity check matrix.

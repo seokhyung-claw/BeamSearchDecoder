@@ -132,6 +132,22 @@ class BeamSearch:
     def exhausted_max_rounds(self) -> bool:
         return self._beamsearch.exhausted_max_rounds
 
+    @property
+    def pivot_decisions_total(self) -> int:
+        return self._beamsearch.pivot_decisions_total
+
+    @property
+    def pivot_frustration_activations(self) -> int:
+        return self._beamsearch.pivot_frustration_activations
+
+    @property
+    def first_branch_unsat_frac(self) -> float:
+        return self._beamsearch.first_branch_unsat_frac
+
+    @property
+    def pivot_chosen_degree(self) -> int:
+        return self._beamsearch.pivot_chosen_degree
+
     def decode_batch(
         self,
         shots: np.ndarray,

@@ -71,6 +71,12 @@ namespace ldpc {
             int total_bp_iterations;
             bool exhausted_max_rounds;
 
+            // Mechanism logging (per-decode stats, reset each decode() call)
+            int pivot_decisions_total;       // total branching decisions made
+            int pivot_frustration_activations; // times frustration mode was used
+            double first_branch_unsat_frac;  // unsat fraction at the very first branch
+            int pivot_chosen_degree;         // Tanner-graph degree of first branch pivot
+
             BeamSearchDecoder(
                     BpSparse &parity_check_matrix,
                     std::vector<double> channel_probabilities,
@@ -134,15 +140,26 @@ namespace ldpc {
             int select_pivot(const std::vector<uint8_t>& residual_syndrome,
                              const std::vector<int>& bit_masks,
                              const std::vector<double>& LLR_sums) {
+                this->pivot_decisions_total++;
                 int effective_pivot = this->pivot_mode;
-                if (effective_pivot == 2) {
-                    // Adaptive: count unsatisfied check fraction
+                double unsat_frac = 0.0;
+                if (effective_pivot == 2 || effective_pivot == 1 || effective_pivot == 0) {
+                    // Always compute unsat_frac for logging
                     int unsat_total = 0;
                     for (int ci = 0; ci < this->check_count; ci++) {
                         if (residual_syndrome[ci] != 0) unsat_total++;
                     }
-                    double unsat_frac = static_cast<double>(unsat_total) / static_cast<double>(this->check_count);
+                    unsat_frac = static_cast<double>(unsat_total) / static_cast<double>(this->check_count);
+                    // Record first branch stats
+                    if (this->first_branch_unsat_frac < 0.0) {
+                        this->first_branch_unsat_frac = unsat_frac;
+                    }
+                }
+                if (effective_pivot == 2) {
                     effective_pivot = (unsat_frac > this->pivot_threshold) ? 1 : 0;
+                }
+                if (effective_pivot == 1) {
+                    this->pivot_frustration_activations++;
                 }
                 if (effective_pivot == 0) {
                     // Original: min |LLR| among eligible bits
@@ -155,6 +172,9 @@ namespace ldpc {
                             min_score = std::abs(LLR_sums[i]);
                             min_idx = i;
                         }
+                    }
+                    if (this->pivot_decisions_total == 1) {
+                        this->pivot_chosen_degree = this->pcm.iterate_column(min_idx).entry_count;
                     }
                     return min_idx;
                 } else {
@@ -181,6 +201,9 @@ namespace ldpc {
                             best_llr = abs_llr;
                         }
                     }
+                    if (this->pivot_decisions_total == 1) {
+                        this->pivot_chosen_degree = this->pcm.iterate_column(best_idx).entry_count;
+                    }
                     return best_idx;
                 }
             }
@@ -205,6 +228,10 @@ namespace ldpc {
                 this->beam_paths_explored = 0;
                 this->total_bp_iterations = 0;
                 this->exhausted_max_rounds = 0;
+                this->pivot_decisions_total = 0;
+                this->pivot_frustration_activations = 0;
+                this->first_branch_unsat_frac = -1.0;
+                this->pivot_chosen_degree = 0;
 
                 this->initialise_log_domain_bp();
 

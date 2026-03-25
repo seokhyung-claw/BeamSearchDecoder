@@ -53,6 +53,10 @@ cdef extern from "beam_search.hpp" namespace "ldpc::bp":
             double nms_alpha
             int pivot_mode
             double pivot_threshold
+            int pivot_decisions_total
+            int pivot_frustration_activations
+            double first_branch_unsat_frac
+            int pivot_chosen_degree
             vector[uint8_t] decoding
             vector[uint8_t] candidate_syndrome
             vector[double] log_prob_ratios
