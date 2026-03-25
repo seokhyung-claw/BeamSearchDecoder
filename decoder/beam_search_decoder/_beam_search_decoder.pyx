@@ -96,6 +96,7 @@ cdef class BeamSearchDecoderBase:
         score_mode=kwargs.get("score_mode",0)
         nms_alpha=kwargs.get("nms_alpha",1.0)
         pivot_mode=kwargs.get("pivot_mode",0)
+        pivot_threshold=kwargs.get("pivot_threshold",0.15)
         channel_probs = kwargs.get("channel_probs", [None])
 
         """
@@ -123,7 +124,7 @@ cdef class BeamSearchDecoderBase:
 
 
         ## initialise the decoder with default values
-        self.bpd = new BeamSearchDecoderCpp(self.pcm[0],self._error_channel,10,8,1,30,20,0,1.0,0)
+        self.bpd = new BeamSearchDecoderCpp(self.pcm[0],self._error_channel,10,8,1,30,20,0,1.0,0,0.15)
 
         ## set the decoder parameters
         self.max_rounds = max_rounds
@@ -134,6 +135,7 @@ cdef class BeamSearchDecoderBase:
         self.score_mode = score_mode
         self.bpd.nms_alpha = nms_alpha
         self.bpd.pivot_mode = pivot_mode
+        self.bpd.pivot_threshold = pivot_threshold
 
         if error_channel is not None:
             self.error_channel = error_channel
@@ -434,7 +436,7 @@ cdef class BeamSearchDecoder(BeamSearchDecoderBase):
                  iters_per_round: Optional[int] = 20, score_mode: Optional[int] = 0, **kwargs):
 
         for key in kwargs.keys():
-            if key not in ["channel_probs", "nms_alpha", "pivot_mode"]:
+            if key not in ["channel_probs", "nms_alpha", "pivot_mode", "pivot_threshold"]:
                 raise ValueError(f"Unknown parameter '{key}' passed to the BeamSearchDecoder constructor.")
 
         pass

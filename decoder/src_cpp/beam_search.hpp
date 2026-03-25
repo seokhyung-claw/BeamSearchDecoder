@@ -56,7 +56,8 @@ namespace ldpc {
             int iters_per_round;
             int score_mode;
             double nms_alpha;
-            int pivot_mode;  // 0=min-|LLR| (original), 1=check-frustration-weighted
+            int pivot_mode;  // 0=min-|LLR| (original), 1=check-frustration-weighted, 2=adaptive hybrid
+            double pivot_threshold;  // for pivot_mode=2: unsatisfied-check fraction above which to use frustration
             std::vector<uint8_t> decoding;
             std::vector<uint8_t> candidate_syndrome;
 
@@ -80,11 +81,12 @@ namespace ldpc {
                     int iters_per_round = 20,
                     int score_mode = 0,
                     double nms_alpha = 1.0,
-                    int pivot_mode = 0) :
+                    int pivot_mode = 0,
+                    double pivot_threshold = 0.15) :
                     pcm(parity_check_matrix), channel_probabilities(std::move(channel_probabilities)),
                     check_count(pcm.m), bit_count(pcm.n), max_rounds(max_rounds), beam_width(beam_width), num_results(num_results),
                     initial_iters(initial_iters), iters_per_round(iters_per_round), score_mode(score_mode),
-                    nms_alpha(nms_alpha), pivot_mode(pivot_mode),
+                    nms_alpha(nms_alpha), pivot_mode(pivot_mode), pivot_threshold(pivot_threshold),
                     iterations(0) //the parity check matrix is passed in by reference
             {
 
@@ -112,9 +114,13 @@ namespace ldpc {
                     throw std::runtime_error(
                             "nms_alpha must be in (0.0, 1.0]");
                 }
-                if (this->pivot_mode < 0 || this->pivot_mode > 1) {
+                if (this->pivot_mode < 0 || this->pivot_mode > 2) {
                     throw std::runtime_error(
-                            "pivot_mode must be 0 (min-|LLR|) or 1 (check-frustration-weighted)");
+                            "pivot_mode must be 0 (min-|LLR|), 1 (check-frustration-weighted), or 2 (adaptive hybrid)");
+                }
+                if (this->pivot_threshold < 0.0 || this->pivot_threshold > 1.0) {
+                    throw std::runtime_error(
+                            "pivot_threshold must be in [0.0, 1.0]");
                 }
             }
 
@@ -128,7 +134,17 @@ namespace ldpc {
             int select_pivot(const std::vector<uint8_t>& residual_syndrome,
                              const std::vector<int>& bit_masks,
                              const std::vector<double>& LLR_sums) {
-                if (this->pivot_mode == 0) {
+                int effective_pivot = this->pivot_mode;
+                if (effective_pivot == 2) {
+                    // Adaptive: count unsatisfied check fraction
+                    int unsat_total = 0;
+                    for (int ci = 0; ci < this->check_count; ci++) {
+                        if (residual_syndrome[ci] != 0) unsat_total++;
+                    }
+                    double unsat_frac = static_cast<double>(unsat_total) / static_cast<double>(this->check_count);
+                    effective_pivot = (unsat_frac > this->pivot_threshold) ? 1 : 0;
+                }
+                if (effective_pivot == 0) {
                     // Original: min |LLR| among eligible bits
                     double min_score = std::numeric_limits<double>::max();
                     int min_idx = 0;

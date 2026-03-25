@@ -38,7 +38,8 @@ cdef extern from "beam_search.hpp" namespace "ldpc::bp":
                 int iters_per_round,
                 int score_mode,
                 double nms_alpha,
-                int pivot_mode) except +
+                int pivot_mode,
+                double pivot_threshold) except +
             BpSparse& pcm
             vector[double] channel_probabilities
             int check_count
@@ -51,6 +52,7 @@ cdef extern from "beam_search.hpp" namespace "ldpc::bp":
             int score_mode
             double nms_alpha
             int pivot_mode
+            double pivot_threshold
             vector[uint8_t] decoding
             vector[uint8_t] candidate_syndrome
             vector[double] log_prob_ratios
