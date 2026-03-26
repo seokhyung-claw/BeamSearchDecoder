@@ -86,6 +86,18 @@ class BeamSearchDecoderBase:
     def exhausted_max_rounds(self) -> bool: ...
 
     @property
+    def pivot_decisions_total(self) -> int: ...
+
+    @property
+    def pivot_frustration_activations(self) -> int: ...
+
+    @property
+    def first_branch_unsat_frac(self) -> float: ...
+
+    @property
+    def pivot_chosen_degree(self) -> int: ...
+
+    @property
     def check_count(self) -> int:
         """
         Returns the number of rows of the parity check matrix.

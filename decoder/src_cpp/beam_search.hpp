@@ -26,6 +26,7 @@
 #include <chrono>
 #include <stdexcept> // required for std::runtime_error
 #include <set>
+#include <tuple>
 
 #include "math.h"
 #include "sparse_matrix_base.hpp"
@@ -112,9 +113,9 @@ namespace ldpc {
                     throw std::runtime_error(
                             "Channel probabilities vector must have length equal to the number of bits");
                 }
-                if (this->score_mode < 0 || this->score_mode > 3) {
+                if (this->score_mode < 0 || this->score_mode > 4) {
                     throw std::runtime_error(
-                            "score_mode must be 0 (llr_sum), 1 (entropy), 2 (weakest_k), or 3 (hybrid)");
+                            "score_mode must be 0 (llr_sum), 1 (entropy), 2 (weakest_k), 3 (hybrid), or 4 (residual_min_llr_tiebreak)");
                 }
                 if (this->nms_alpha <= 0.0 || this->nms_alpha > 1.0) {
                     throw std::runtime_error(
@@ -246,8 +247,8 @@ namespace ldpc {
 
                 this->initialise_log_domain_bp();
 
-                using Pair = std::pair<double, int>;
-                std::priority_queue<Pair, std::vector<Pair>, std::greater<Pair>> min_pq;
+                using ScoreEntry = std::tuple<double, double, int>;
+                std::priority_queue<ScoreEntry, std::vector<ScoreEntry>, std::greater<ScoreEntry>> min_pq;
                 std::vector<int> bit_masks(this->bit_count, -1);
                 std::vector<double> LLR_sums(this->bit_count, 0);
                 int edge_msgs_length = 0;
@@ -423,6 +424,7 @@ namespace ldpc {
 
                         this->converge = 0;
                         for (int i = 0; i < this->bit_count; i++) LLR_sums[i] = 0;
+                        int min_residual_unsat = this->check_count;
 
                         //main interation loop
                         for (int it = 1; it <= this->iters_per_round; it++) {
@@ -510,7 +512,16 @@ namespace ldpc {
                                 }
                             }
 
-                            if (std::equal(candidate_syndrome.begin(), candidate_syndrome.end(), syndrome.begin())) {
+                            int residual_unsat = 0;
+                            for (int ci = 0; ci < this->check_count; ci++) {
+                                if (this->candidate_syndrome[ci] != syndrome[ci]) {
+                                    residual_unsat++;
+                                }
+                            }
+                            if (residual_unsat < min_residual_unsat) {
+                                min_residual_unsat = residual_unsat;
+                            }
+                            if (residual_unsat == 0) {
                                 this->converge = true;
                             }
 
@@ -540,13 +551,15 @@ namespace ldpc {
 
                         // Compare different paths.
                         double score = 0;
+                        double tie_break_score = 0;
+                        double primary_score = 0;
                         std::vector<double> avg_abs_llrs;
                         if (this->score_mode == 2 || this->score_mode == 3) {
                             avg_abs_llrs.reserve(this->bit_count);
                         }
                         for (int i = 0; i < this->bit_count; i++) {
                             if (bit_masks[i] == -1) {
-                                if (this->score_mode == 0) {
+                                if (this->score_mode == 0 || this->score_mode == 4) {
                                     score += std::abs(LLR_sums[i]);
                                 } else {
                                     double avg_abs_llr = std::abs(LLR_sums[i]) / static_cast<double>(this->iterations);
@@ -567,7 +580,7 @@ namespace ldpc {
                                 }
                             }
                         }
-                        if (this->score_mode == 0) {
+                        if (this->score_mode == 0 || this->score_mode == 4) {
                             score = score / static_cast<double>(this->iterations);
                         } else if (this->score_mode == 2 || this->score_mode == 3) {
                             int weakest_k = std::min(8, static_cast<int>(avg_abs_llrs.size()));
@@ -590,7 +603,13 @@ namespace ldpc {
                                 }
                             }
                         }
-                        if (min_pq.size() >= this->beam_width && score < min_pq.top().first) {
+                        if (this->score_mode == 4) {
+                            primary_score = -static_cast<double>(min_residual_unsat);
+                            tie_break_score = score;
+                        } else {
+                            primary_score = score;
+                        }
+                        if (min_pq.size() >= static_cast<size_t>(this->beam_width) && std::make_tuple(primary_score, tie_break_score) < std::make_tuple(std::get<0>(min_pq.top()), std::get<1>(min_pq.top()))) {
                             // restore the bit_masks vector and the syndrome vector
                             for (int i = 0; i <= round; i++) {
                                 bit_masks[fixed_indices[start + list_ele][i]] = -1;
@@ -632,8 +651,8 @@ namespace ldpc {
                             }
                         }
 
-                        min_pq.push({score, store_idx});
-                        if (min_pq.size() > this->beam_width) min_pq.pop();
+                        min_pq.push({primary_score, tie_break_score, store_idx});
+                        if (min_pq.size() > static_cast<size_t>(this->beam_width)) min_pq.pop();
                         store_idx++;
 
                         // restore the bit_masks vector and the syndrome vector
@@ -650,7 +669,7 @@ namespace ldpc {
                     // Update for next rounds. Take reverse order because we want to explore elements with higher scores first.
                     explore_list.resize(min_pq.size());
                     for (int i = explore_list.size() - 1; i >= 0; i--) {
-                        explore_list[i] = min_pq.top().second;
+                        explore_list[i] = std::get<2>(min_pq.top());
                         min_pq.pop();
                     }
 
