@@ -56,7 +56,7 @@ namespace ldpc {
             int iters_per_round;
             int score_mode;
             double nms_alpha;
-            int pivot_mode;  // 0=min-|LLR| (original), 1=check-frustration-weighted, 2=adaptive hybrid
+            int pivot_mode;  // 0=min-|LLR|, 1=raw frustration, 2=adaptive raw, 3=degree-normalized frustration, 4=adaptive degree-normalized
             double pivot_threshold;  // for pivot_mode=2: unsatisfied-check fraction above which to use frustration
             std::vector<uint8_t> decoding;
             std::vector<uint8_t> candidate_syndrome;
@@ -120,9 +120,9 @@ namespace ldpc {
                     throw std::runtime_error(
                             "nms_alpha must be in (0.0, 1.0]");
                 }
-                if (this->pivot_mode < 0 || this->pivot_mode > 2) {
+                if (this->pivot_mode < 0 || this->pivot_mode > 4) {
                     throw std::runtime_error(
-                            "pivot_mode must be 0 (min-|LLR|), 1 (check-frustration-weighted), or 2 (adaptive hybrid)");
+                            "pivot_mode must be 0 (min-|LLR|), 1 (raw frustration), 2 (adaptive raw), 3 (degree-normalized frustration), or 4 (adaptive degree-normalized)");
                 }
                 if (this->pivot_threshold < 0.0 || this->pivot_threshold > 1.0) {
                     throw std::runtime_error(
@@ -142,23 +142,21 @@ namespace ldpc {
                              const std::vector<double>& LLR_sums) {
                 this->pivot_decisions_total++;
                 int effective_pivot = this->pivot_mode;
-                double unsat_frac = 0.0;
-                if (effective_pivot == 2 || effective_pivot == 1 || effective_pivot == 0) {
-                    // Always compute unsat_frac for logging
-                    int unsat_total = 0;
-                    for (int ci = 0; ci < this->check_count; ci++) {
-                        if (residual_syndrome[ci] != 0) unsat_total++;
-                    }
-                    unsat_frac = static_cast<double>(unsat_total) / static_cast<double>(this->check_count);
-                    // Record first branch stats
-                    if (this->first_branch_unsat_frac < 0.0) {
-                        this->first_branch_unsat_frac = unsat_frac;
-                    }
+                // Always compute unsat_frac for logging / adaptive gating.
+                int unsat_total = 0;
+                for (int ci = 0; ci < this->check_count; ci++) {
+                    if (residual_syndrome[ci] != 0) unsat_total++;
+                }
+                double unsat_frac = static_cast<double>(unsat_total) / static_cast<double>(this->check_count);
+                if (this->first_branch_unsat_frac < 0.0) {
+                    this->first_branch_unsat_frac = unsat_frac;
                 }
                 if (effective_pivot == 2) {
                     effective_pivot = (unsat_frac > this->pivot_threshold) ? 1 : 0;
+                } else if (effective_pivot == 4) {
+                    effective_pivot = (unsat_frac > this->pivot_threshold) ? 3 : 0;
                 }
-                if (effective_pivot == 1) {
+                if (effective_pivot == 1 || effective_pivot == 3) {
                     this->pivot_frustration_activations++;
                 }
                 if (effective_pivot == 0) {
@@ -178,26 +176,31 @@ namespace ldpc {
                     }
                     return min_idx;
                 } else {
-                    // Check-frustration-weighted: pick the bit touching the most
-                    // unsatisfied checks; tie-break by min |LLR|.
+                    // Syndrome-aware pivot:
+                    // mode 1: maximize raw unsatisfied-check count
+                    // mode 3: maximize degree-normalized unsatisfied fraction
+                    // tie-break by min |LLR|.
                     int best_idx = 0;
-                    int best_unsat = -1;
+                    double best_score = -1.0;
                     double best_llr = std::numeric_limits<double>::max();
                     for (int i = 0; i < this->bit_count; i++) {
                         if (bit_masks[i] != -1) continue;
-                        if (this->pcm.iterate_column(i).entry_count <= 2) continue;
-                        // Count unsatisfied checks this bit participates in
+                        int degree = this->pcm.iterate_column(i).entry_count;
+                        if (degree <= 2) continue;
                         int unsat_count = 0;
                         for (auto &e : this->pcm.iterate_column(i)) {
                             if (residual_syndrome[e.row_index] != 0) {
                                 unsat_count++;
                             }
                         }
+                        double score = (effective_pivot == 3)
+                                ? static_cast<double>(unsat_count) / static_cast<double>(degree)
+                                : static_cast<double>(unsat_count);
                         double abs_llr = std::abs(LLR_sums[i]);
-                        if (unsat_count > best_unsat ||
-                            (unsat_count == best_unsat && abs_llr < best_llr)) {
+                        if (score > best_score ||
+                            (score == best_score && abs_llr < best_llr)) {
                             best_idx = i;
-                            best_unsat = unsat_count;
+                            best_score = score;
                             best_llr = abs_llr;
                         }
                     }
