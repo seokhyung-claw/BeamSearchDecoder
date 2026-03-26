@@ -56,7 +56,7 @@ namespace ldpc {
             int iters_per_round;
             int score_mode;
             double nms_alpha;
-            int pivot_mode;  // 0=min-|LLR|, 1=raw frustration, 2=adaptive raw, 3=degree-normalized frustration, 4=adaptive degree-normalized
+            int pivot_mode;  // 0=min-|LLR|, 1=raw frustration, 2=adaptive raw, 3=degree-normalized frustration, 4=adaptive degree-normalized, 5=degree-only, 6=adaptive degree-only
             double pivot_threshold;  // for pivot_mode=2: unsatisfied-check fraction above which to use frustration
             std::vector<uint8_t> decoding;
             std::vector<uint8_t> candidate_syndrome;
@@ -120,9 +120,9 @@ namespace ldpc {
                     throw std::runtime_error(
                             "nms_alpha must be in (0.0, 1.0]");
                 }
-                if (this->pivot_mode < 0 || this->pivot_mode > 4) {
+                if (this->pivot_mode < 0 || this->pivot_mode > 6) {
                     throw std::runtime_error(
-                            "pivot_mode must be 0 (min-|LLR|), 1 (raw frustration), 2 (adaptive raw), 3 (degree-normalized frustration), or 4 (adaptive degree-normalized)");
+                            "pivot_mode must be 0 (min-|LLR|), 1 (raw frustration), 2 (adaptive raw), 3 (degree-normalized frustration), 4 (adaptive degree-normalized), 5 (degree-only), or 6 (adaptive degree-only)");
                 }
                 if (this->pivot_threshold < 0.0 || this->pivot_threshold > 1.0) {
                     throw std::runtime_error(
@@ -155,8 +155,10 @@ namespace ldpc {
                     effective_pivot = (unsat_frac > this->pivot_threshold) ? 1 : 0;
                 } else if (effective_pivot == 4) {
                     effective_pivot = (unsat_frac > this->pivot_threshold) ? 3 : 0;
+                } else if (effective_pivot == 6) {
+                    effective_pivot = (unsat_frac > this->pivot_threshold) ? 5 : 0;
                 }
-                if (effective_pivot == 1 || effective_pivot == 3) {
+                if (effective_pivot == 1 || effective_pivot == 3 || effective_pivot == 5) {
                     this->pivot_frustration_activations++;
                 }
                 if (effective_pivot == 0) {
@@ -176,9 +178,10 @@ namespace ldpc {
                     }
                     return min_idx;
                 } else {
-                    // Syndrome-aware pivot:
+                    // Alternative pivots:
                     // mode 1: maximize raw unsatisfied-check count
                     // mode 3: maximize degree-normalized unsatisfied fraction
+                    // mode 5: maximize degree only
                     // tie-break by min |LLR|.
                     int best_idx = 0;
                     double best_score = -1.0;
@@ -193,9 +196,14 @@ namespace ldpc {
                                 unsat_count++;
                             }
                         }
-                        double score = (effective_pivot == 3)
-                                ? static_cast<double>(unsat_count) / static_cast<double>(degree)
-                                : static_cast<double>(unsat_count);
+                        double score;
+                        if (effective_pivot == 3) {
+                            score = static_cast<double>(unsat_count) / static_cast<double>(degree);
+                        } else if (effective_pivot == 5) {
+                            score = static_cast<double>(degree);
+                        } else {
+                            score = static_cast<double>(unsat_count);
+                        }
                         double abs_llr = std::abs(LLR_sums[i]);
                         if (score > best_score ||
                             (score == best_score && abs_llr < best_llr)) {
